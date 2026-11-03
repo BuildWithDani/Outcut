@@ -2,7 +2,8 @@ import path from "node:path";
 import { app } from "electron";
 
 if (process.env["VITE_DEV_SERVER_URL"]) {
-	const devUserDataPath = path.join(app.getPath("appData"), "Recordly-dev");
+	// Dev-only profile directory. Production still uses Electron's product-name path.
+	const devUserDataPath = path.join(app.getPath("appData"), "Outcut-dev");
 	app.setPath("userData", devUserDataPath);
 	app.setPath("sessionData", path.join(devUserDataPath, "session"));
 }

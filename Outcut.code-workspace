@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "Outcut AI",
+			"path": "."
+		}
+	],
+	"settings": {
+		"window.title": "Outcut AI${separator}${activeEditorShort}${separator}${rootName}"
+	}
+}
