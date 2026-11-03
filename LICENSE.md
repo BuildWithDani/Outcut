@@ -10,10 +10,14 @@ Version 3, 19 November 2007
   same AGPLv3 license.
 - You CANNOT use the "Recordly" name or branding for your own project.
 - If you use Recordly's code or create code derived from Recordly you must attribute Recordly in the user-facing UI and the repo.
+- Outcut AI branding (name and logo) is distinct; see `TRADEMARKS.md`.
 
-Copyright (C) 2026 webadderall
+Copyright (C) 2026 webadderall  
+Copyright (C) 2026 BuildWithDani (Outcut AI branding, documentation, and independently authored additions)
 
+Outcut AI is an independent AGPL-3.0 distribution maintained by BuildWithDani, derived from Recordly.
 Recordly is an independent application that started as a fork of the OpenScreen project, authored by Siddharth Vaddem (2025).
+BuildWithDani does not claim ownership of Recordly-derived or OpenScreen-derived code. See `NOTICE.md` and `UPSTREAM.md`.
 
 ---
 PART 1: THE AGPLv3 LICENSE 

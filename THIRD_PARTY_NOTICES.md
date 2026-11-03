@@ -1,8 +1,10 @@
 # Third-party notices
 
+Outcut AI redistributes the same third-party components as its Recordly upstream unless noted otherwise.
+
 ## Voom
 
-Recordly Share includes code adapted from the Voom project:
+Outcut AI / Recordly Share includes code adapted from the Voom project:
 
 - Project: [Voom](https://github.com/aritropaul/voom)
 - Adapted component: `services/recordly-share/worker`
@@ -10,8 +12,9 @@ Recordly Share includes code adapted from the Voom project:
 - Copyright © 2026 Aritro Paul
 - Upstream reference: `c1c0350ed610b0c9bc4a307fcc6a01aab0f926f9`
 
-Recordly changes include product branding, desktop publishing integration,
+Upstream Recordly changes include product branding, desktop publishing integration,
 authenticated commenting, local-development configuration, and viewer styling.
+Outcut AI additionally rebrands user-facing Share UI strings where those pages are built from source.
 
 The Voom software is provided under the following license:
 

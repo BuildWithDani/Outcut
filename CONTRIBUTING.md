@@ -1,63 +1,70 @@
 # Contribution Guidelines
 
-Thank you for considering contributing to this project! By contributing, you help make this project better for everyone. Please take a moment to review these guidelines to ensure a smooth contribution process.
+Thank you for considering contributing to **Outcut AI**. By contributing, you help make this project better for everyone.
 
 Areas where help is especially valuable:
+
 - Export optimisations
 - Native screen recording for Linux
 - Wallpaper submissions
 - Extensions (device frames, click effects, render hooks — see [EXTENSIONS.md](./EXTENSIONS.md))
+- Documentation and localization polish
+- Future AI Director 2.0 work (tracked separately; not part of the rebrand milestone)
 
 ## How to Contribute
 
 1. **Fork the Repository**
-   - Click the "Fork" button at the top right of this repository to create your own copy.
+   - Fork https://github.com/BuildWithDani/Outcut
 
 2. **Clone Your Fork**
-   - Clone your forked repository to your local machine:
-     ```bash
-     git clone https://github.com/your-username/Recordly.git
-     ```
+   ```bash
+   git clone https://github.com/your-username/Outcut.git
+   ```
 
 3. **Create a New Branch**
-   - Create a branch for your feature or bug fix:
-     ```bash
-     git checkout -b feature/your-feature-name
-     ```
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
 
 4. **Make Changes**
-   - Make your changes.
+   - Prefer focused diffs. Do not redesign existing Recordly-derived UI unless the issue asks for it.
+   - Preserve `.recordly` project compatibility and existing storage keys unless a migration is explicitly planned.
 
 5. **Test Your Changes**
-   - Test your changes thoroughly to ensure they work as expected and do not break existing functionality.
+   - Run lint/typecheck/tests relevant to your change.
+   - On Windows, smoke-test recorder and editor when touching capture or packaging.
 
 6. **Commit Your Changes**
-   - Commit your changes with a clear and concise commit message:
-     ```bash
-     git add .
-     git commit -m "Add a brief description of your changes"
-     ```
+   ```bash
+   git add .
+   git commit -m "Add a brief description of your changes"
+   ```
 
 7. **Push Your Changes**
-   - Push your branch to your forked repository:
-     ```bash
-     git push origin feature/your-feature-name
-     ```
+   ```bash
+   git push origin feature/your-feature-name
+   ```
 
 8. **Open a Pull Request**
-   - Go to the original repository and open a pull request from your branch. Provide a clear description of your changes and the problem they solve.
+   - Open a PR against https://github.com/BuildWithDani/Outcut
+   - Describe the problem, the fix, and how you tested it
 
 ## Reporting Issues
 
-If you encounter a bug or have a feature request, please open an issue in the [Issues](https://github.com/webadderallorg/Recordly/issues) section of this repository. Provide as much detail as possible to help us address the issue effectively.
+Open an issue at https://github.com/BuildWithDani/Outcut/issues with reproduction steps, OS, and Outcut AI version/commit.
+
+Security reports: see [SECURITY.md](./SECURITY.md).
+
+## Upstream relationship
+
+Outcut AI is derived from [Recordly](https://github.com/webadderallorg/Recordly) (AGPL-3.0), which started from [OpenScreen](https://github.com/siddharthvaddem/openscreen) (MIT). See [UPSTREAM.md](./UPSTREAM.md) and [NOTICE.md](./NOTICE.md).
 
 ## Style Guide
 
-- Write clear, concise, and descriptive commit messages.
-- Include comments where necessary to explain complex code.
+- Write clear, concise commit messages.
+- Comment complex logic where necessary.
+- Keep branding as **Outcut AI**; do not reintroduce Recordly logos as product branding.
 
 ## License
 
-By contributing to this project, you agree that your contributions will be licensed under the [GNU Affero General Public License v3.0](./LICENSE.md).
-
-Thank you for your contributions!
+By contributing, you agree that your contributions are licensed under the [GNU Affero General Public License v3.0](./LICENSE.md).
