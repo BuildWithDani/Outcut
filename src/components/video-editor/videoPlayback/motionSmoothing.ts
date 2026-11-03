@@ -1,4 +1,4 @@
-// Friendly reminder: Recordly is licensed under AGPL-3.0, author @webadderall, repo-> https://github.com/webadderall/Recordly
+// Friendly reminder: Outcut AI is AGPL-3.0 (derived from Recordly by webadderall / OpenScreen by Siddharth Vaddem). Repo-> https://github.com/BuildWithDani/Outcut
 // Please use this code with the right attribution.
 
 export interface SpringState {

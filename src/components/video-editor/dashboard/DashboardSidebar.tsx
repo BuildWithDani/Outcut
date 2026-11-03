@@ -1,3 +1,4 @@
+import { CreditsDialog } from "@/components/credits/CreditsDialog";
 import { FeedbackDialog } from "@/components/feedback/FeedbackDialog";
 import { RecordNewButton } from "./RecordNewButton";
 import { SidebarCards } from "./SidebarCards";
@@ -45,11 +46,11 @@ export function DashboardSidebar({
 			>
 				<div className="mb-4 flex h-10 items-center gap-2.5 px-3">
 					<img
-						src={`${import.meta.env.BASE_URL}app-icons/recordly-64.png`}
+						src={`${import.meta.env.BASE_URL}app-icons/outcut-64.png`}
 						alt=""
 						className="size-7 rounded-lg"
 					/>
-					<span className="text-[15px] font-semibold tracking-tight">Recordly</span>
+					<span className="text-[15px] font-semibold tracking-tight">Outcut AI</span>
 				</div>
 				<RecordNewButton busy={busy} run={run} className="mb-5 w-full" />
 				<nav className="space-y-1">
@@ -136,6 +137,7 @@ export function DashboardSidebar({
 				</div>
 				<div className="space-y-1 pt-6">
 					<SidebarCards />
+					<CreditsDialog showLabel className={navClass(false)} />
 					<FeedbackDialog showLabel className={navClass(false)} onSignIn={onSignIn} />
 					<Button
 						variant="ghost"

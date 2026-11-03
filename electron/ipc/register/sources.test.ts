@@ -18,7 +18,7 @@ vi.mock("electron", () => ({
 		handle: (name: string, handler: (...args: unknown[]) => unknown) =>
 			mocks.handlers.set(name, handler),
 	},
-	app: { getName: () => "Recordly", focus: vi.fn() },
+	app: { getName: () => "Outcut AI", focus: vi.fn() },
 	BrowserWindow: { getAllWindows: mocks.windows },
 	desktopCapturer: { getSources: mocks.sources },
 }));

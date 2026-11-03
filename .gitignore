@@ -49,3 +49,9 @@ gpu-export-probe.mp4
 # Browser test output
 test-results/
 playwright-report/
+
+# Local whisper runtime DLLs rebuilt on Windows
+electron/native/bin/win32-x64/SDL2.dll
+electron/native/bin/win32-x64/ggml*.dll
+electron/native/bin/win32-x64/whisper.dll
+

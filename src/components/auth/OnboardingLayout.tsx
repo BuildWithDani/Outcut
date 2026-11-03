@@ -107,14 +107,14 @@ export function OnboardingHeader({
 				<div
 					data-onboarding-brand
 					className="mb-3 flex items-center gap-2.5"
-					aria-label="Recordly"
+					aria-label="Outcut AI"
 				>
 					<img
-						src={`${import.meta.env.BASE_URL}app-icons/recordly-128.png`}
+						src={`${import.meta.env.BASE_URL}app-icons/outcut-128.png`}
 						alt=""
 						className="size-10 rounded-xl"
 					/>
-					<span className="text-lg font-semibold tracking-tight">Recordly</span>
+					<span className="text-lg font-semibold tracking-tight">Outcut AI</span>
 				</div>
 			)}
 			<Modal.Heading className="text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">

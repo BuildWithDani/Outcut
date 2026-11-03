@@ -176,6 +176,8 @@ export async function getDesktopSources(
 	const ownWindowNames = new Set(
 		[
 			app.getName(),
+			"Outcut AI",
+			"Outcut",
 			"Recordly",
 			...BrowserWindow.getAllWindows().flatMap((win) => {
 				const title = win.getTitle().trim();
@@ -246,7 +248,11 @@ export async function getDesktopSources(
 					return true;
 				}
 
-				if (ALLOW_RECORDLY_WINDOW_CAPTURE && normalizedName.includes("recordly")) {
+				if (
+					ALLOW_RECORDLY_WINDOW_CAPTURE &&
+					(normalizedName.includes("recordly") ||
+						normalizedName.includes("outcut"))
+				) {
 					return true;
 				}
 
@@ -302,7 +308,11 @@ export async function getDesktopSources(
 
 				if (
 					ALLOW_RECORDLY_WINDOW_CAPTURE &&
-					(normalizedAppName === "recordly" || normalizedWindowName?.includes("recordly"))
+					(normalizedAppName === "recordly" ||
+						normalizedAppName === "outcut" ||
+						normalizedAppName === "outcut ai" ||
+						normalizedWindowName?.includes("recordly") ||
+						normalizedWindowName?.includes("outcut"))
 				) {
 					return true;
 				}
@@ -361,7 +371,11 @@ export async function getDesktopSources(
 					return true;
 				}
 
-				if (ALLOW_RECORDLY_WINDOW_CAPTURE && normalizedName.includes("recordly")) {
+				if (
+					ALLOW_RECORDLY_WINDOW_CAPTURE &&
+					(normalizedName.includes("recordly") ||
+						normalizedName.includes("outcut"))
+				) {
 					return true;
 				}
 

@@ -208,15 +208,15 @@ export default function SharePage() {
 			const result = await fetchShareData(code);
 			if (isExpired(result)) {
 				setView("expired");
-				document.title = "Recording unavailable — Recordly";
+				document.title = "Recording unavailable — Outcut AI";
 			} else if (isPasswordRequired(result)) {
 				setView("password");
 				setTitle(result.title);
-				document.title = `${result.title} — Recordly`;
+				document.title = `${result.title} — Outcut AI`;
 			} else if (isShareData(result)) {
 				setData(result);
 				setView("recording");
-				document.title = `${result.video.title} — Recordly`;
+				document.title = `${result.video.title} — Outcut AI`;
 			} else setView("error");
 		} catch {
 			setView("error");

@@ -1052,7 +1052,7 @@ export class ModernVideoExporter {
 				);
 			}
 			guidance.add(
-				"The input video decoder failed before Recordly could finish rendering the source frames.",
+				"The input video decoder failed before Outcut AI could finish rendering the source frames.",
 			);
 			guidance.add(
 				"If only this recording fails, remux or convert it to a standard H.264 MP4; the source may contain a damaged or unsupported frame.",
@@ -1127,7 +1127,7 @@ export class ModernVideoExporter {
 		];
 
 		if (this.runtimeDiagnostics.appVersion) {
-			lines.push(`Recordly version: ${this.runtimeDiagnostics.appVersion}`);
+			lines.push(`Outcut AI version: ${this.runtimeDiagnostics.appVersion}`);
 		}
 		if (this.runtimeDiagnostics.userAgent) {
 			lines.push(`Runtime: ${this.runtimeDiagnostics.userAgent}`);
@@ -2799,7 +2799,7 @@ export class ModernVideoExporter {
 			avc: { format: "annexb" },
 		});
 
-		// Prefer hardware H.264, but fall back to software. Recordly disables
+		// Prefer hardware H.264, but fall back to software. Outcut AI disables
 		// VA-API on Linux (see electron/gpuSwitches.ts), so hardware encoding is
 		// frequently unavailable there even though software encoding works.
 		let encoderConfig = buildEncoderConfig("prefer-hardware");

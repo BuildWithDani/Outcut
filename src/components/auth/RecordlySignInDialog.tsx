@@ -174,7 +174,7 @@ export function RecordlySignInDialog({
 		void run("link", async () => {
 			await sendSignInLink(email.trim());
 			setMessage(
-				"Check your inbox to verify your email and continue to Recordly. Open the link on this computer with Recordly running.",
+				"Check your inbox to verify your email and continue to Outcut AI. Open the link on this computer with Outcut AI running.",
 			);
 			setLinkSent(true);
 		});
@@ -233,11 +233,11 @@ export function RecordlySignInDialog({
 											Welcome to{" "}
 											<span className="inline-flex items-center gap-2 whitespace-nowrap align-bottom">
 												<img
-													src={`${import.meta.env.BASE_URL}app-icons/recordly-128.png`}
+													src={`${import.meta.env.BASE_URL}app-icons/outcut-128.png`}
 													alt=""
 													className="size-7 rounded-lg sm:size-8"
 												/>
-												Recordly
+												Outcut AI
 											</span>
 										</>
 									)
@@ -245,19 +245,19 @@ export function RecordlySignInDialog({
 								description={
 									user
 										? user.email || "You’re signed in and ready to continue."
-										: "Sign in to Recordly to start recording, save your work and share it."
+										: "Sign in to Outcut AI to start recording, save your work and share it."
 								}
 							/>
 						) : (
 							<Modal.Header className="items-center gap-3 text-center">
-								<div className="flex items-center gap-3" aria-label="Recordly">
+								<div className="flex items-center gap-3" aria-label="Outcut AI">
 									<img
-										src={`${import.meta.env.BASE_URL}app-icons/recordly-128.png`}
+										src={`${import.meta.env.BASE_URL}app-icons/outcut-128.png`}
 										alt=""
 										className="size-12 rounded-xl"
 									/>
 									<span className="text-3xl font-semibold tracking-tight">
-										Recordly
+										Outcut AI
 									</span>
 								</div>
 								<Modal.Heading className="whitespace-nowrap text-[clamp(12px,5cqw,22px)] font-semibold leading-tight tracking-tight">
@@ -471,7 +471,7 @@ export function RecordlySignInDialog({
 					<MotionDialog
 						layout={!onboarding}
 						transition={transition}
-						aria-label={onboarding ? "Welcome to Recordly" : undefined}
+						aria-label={onboarding ? "Welcome to Outcut AI" : undefined}
 						data-onboarding-state={
 							onboarding ? (permissions ? "permissions" : "login") : undefined
 						}
