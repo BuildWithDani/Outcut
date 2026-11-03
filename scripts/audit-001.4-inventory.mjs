@@ -100,9 +100,8 @@ function purposeOf(rel, subsystem) {
 
 function classify(rel, textSample) {
 	const p = rel.replaceAll("\\", "/");
-	const reasons = [];
-
 	// Legal retention
+
 	if (
 		[
 			"LICENSE.md",
