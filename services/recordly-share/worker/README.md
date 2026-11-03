@@ -1,8 +1,15 @@
-# Recordly Share
+# Share Worker
 
-Recordly Share is the self-hosted video publishing and review service used by Recordly. It runs as a Cloudflare Worker with R2 video storage, D1 metadata, range streaming, a responsive viewer, timestamped comments, reactions, passwords, expiration, and a private recording library.
+A self-hosted service for publishing and reviewing videos, built on **Cloudflare Workers**. It is optional, and not an official Outcut Cloud.
 
-## Local development
+| Feature | Details |
+| --- | --- |
+| 🎬 Streaming | Range streaming from R2 with a responsive viewer |
+| 💬 Feedback | Timestamped comments and reactions. Viewers don't need an account |
+| 🔒 Access | Passwords, expiration dates, and a private recording library |
+| 🗄️ Storage | R2 for video, D1 for metadata |
+
+## 🧑‍💻 Local development
 
 ```sh
 cp .dev.vars.example .dev.vars
@@ -12,15 +19,20 @@ npm --prefix web run build
 npm run dev
 ```
 
-Set `OWNER_USER_ID` to the deployment owner’s Supabase user ID. Only that user may administer this single-owner library. Set `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` in `.dev.vars` to the same public project configuration used by the desktop app. Recordly sends the signed-in user's access token when it publishes to:
+In `.dev.vars`, set:
 
-- Endpoint: `http://localhost:8787/api/upload`
+| Variable | Value |
+| --- | --- |
+| `OWNER_USER_ID` | The Supabase user ID of the library owner |
+| `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY` | The same public project settings the desktop app uses |
+| `API_SECRET` | Server-side password for library administration |
 
-The Worker validates Supabase access tokens before accepting uploads. `API_SECRET` remains a server-side library-administration password. An API-secret upload fallback can be enabled only for isolated local tests by setting `ALLOW_API_SECRET_UPLOADS=true`; do not enable it in production.
+The desktop app uploads to `http://localhost:8787/api/upload` with the user's access token, which the Worker validates.
 
-Anyone with a valid link can watch and leave timestamped feedback using a display name; commenting does not require an account. Per-IP rate limiting and comment-length limits remain enabled.
+> [!WARNING]
+> `ALLOW_API_SECRET_UPLOADS=true` allows uploads with the API secret. Use it only for isolated local tests, never in production.
 
-## Deployment
+## 🚀 Deploy
 
 ```sh
 npm install
@@ -31,22 +43,32 @@ npx wrangler secret put SUPABASE_PUBLISHABLE_KEY
 npm run deploy
 ```
 
-Set `SUPABASE_URL` as a Worker variable. The ID-less configuration provisions `recordly-share-db` and `recordly-videos` for a new deployment. Desktop builds currently upload only to localhost; production service integration is deferred.
+Set `SUPABASE_URL` as a Worker variable. A new deployment creates the `recordly-share-db` database and the `recordly-videos` bucket.
 
-## Attribution
+## 📚 More guides
 
-This service is adapted from an MIT-licensed open-source project. The required original copyright and permission notice is preserved in [`../LICENSE`](../LICENSE) and Recordly's root `THIRD_PARTY_NOTICES.md`. Product-facing pages use Recordly branding; legal attribution must remain with distributed copies.
+| Guide | Covers |
+| --- | --- |
+| [HOSTED.md](./HOSTED.md) | Multi-account hosted mode |
+| [STAGING.md](./STAGING.md) | Running a separate staging deployment |
+| [CREATOR_PROFILE.md](./CREATOR_PROFILE.md) | The public creator profile shown on recordings |
 
-## Worker source layout
+## 🗂️ Source layout
 
-`src/index.js` contains the fetch/scheduled entry points and error boundaries. `router.js` dispatches requests and applies route access checks. The implementation lives in focused modules:
+| File | Responsibility |
+| --- | --- |
+| `src/index.js` | Fetch and scheduled entry points, error handling |
+| `router.js` | Routing and access checks |
+| `schema.js` | Database setup and migrations |
+| `auth.js`, `accounts.js` | Owner access, video passwords, viewer accounts |
+| `uploads.js` | Upload creation, multipart transfers, metadata |
+| `media.js` | Streaming, captions, share data, social previews |
+| `feedback.js` | Comments and reactions |
+| `library.js` | Listing, renewal, deletion, view counts, expiry cleanup |
+| `crypto.js`, `http.js`, `video.js` | Shared helpers |
 
-- `schema.js`: database bootstrap and migrations.
-- `auth.js` and `accounts.js`: owner/dashboard access, video passwords, and optional viewer accounts.
-- `uploads.js`: upload creation, multipart transfers, and metadata.
-- `media.js`: streaming, captions, share data, and social previews.
-- `feedback.js`: comments and reactions.
-- `library.js`: listing, renewal, deletion, view counts, and expiry cleanup.
-- `crypto.js`, `http.js`, and `video.js`: shared cryptographic, response, and video metadata helpers.
+Run `npm test` in this folder to test the endpoints and migrations.
 
-Run `npm test` here to exercise these modules through the Worker endpoints and database migrations.
+## 📄 Attribution
+
+Adapted from the MIT-licensed [Voom](https://github.com/aritropaul/voom) project. The original notice is kept in [`../LICENSE`](../LICENSE) and in the root [`THIRD_PARTY_NOTICES.md`](../../../THIRD_PARTY_NOTICES.md). Keep both with any copy you distribute.

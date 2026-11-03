@@ -1,65 +1,54 @@
 # Translation Guide
 
-This project uses a namespace-based i18n setup so contributors can localize safely without changing app logic.
+Help bring Outcut AI to more people! 🌍 You can translate the app without touching any app logic.
 
-## Locale Files
+## 📁 Where translations live
 
-All locale files live under:
+Each language has a folder in `src/i18n/locales/`:
 
-- `src/i18n/locales/en/`
-- `src/i18n/locales/es/`
-- `src/i18n/locales/zh-CN/`
+| Code | Language | Code | Language |
+| --- | --- | --- | --- |
+| `en` | English (source) | `nl` | Dutch |
+| `de` | German | `pt-BR` | Portuguese (Brazil) |
+| `es` | Spanish | `ru` | Russian |
+| `fr` | French | `zh-CN` | Chinese (Simplified) |
+| `it` | Italian | `zh-TW` | Chinese (Traditional) |
+| `ko` | Korean | | |
 
-Each locale has the same namespace files:
+Every folder has the same seven files: `common.json`, `launch.json`, `editor.json`, `timeline.json`, `settings.json`, `dialogs.json`, and `shortcuts.json`.
 
-- `common.json`
-- `launch.json`
-- `editor.json`
-- `timeline.json`
-- `settings.json`
-- `dialogs.json`
-- `shortcuts.json`
+> [!TIP]
+> English (`en`) is the source of truth. Every other language must use exactly the same keys.
 
-English (`en`) is the source of truth for key structure.
+## ✍️ Rules for keys
 
-## Key Rules
+- Keep the same key paths in every language.
+- Add new keys to `en` first, then to every other language.
+- Don't rename existing keys unless you also update the code that uses them.
+- Use descriptive, stable names, for example `app.editorTitle`.
+- Use `{{name}}` placeholders for values that get filled in, and keep them unchanged in translations.
 
-- Keep the same key paths across locales.
-- Do not rename existing keys unless coordinated with code changes.
-- Add new keys to `en` first, then mirror into all other locales.
-- Prefer descriptive, stable keys. Example: `app.editorTitle`.
-- Interpolation is supported with `{{name}}` style placeholders.
+## 🔎 How the app finds text
 
-## How Translation Is Read
+- A key such as `settings.export.title` is read from the `settings` file.
+- A key with no prefix is read from `common`.
+- A missing translation falls back to English, then to the fallback text in the code, then to the key itself.
 
-- Keys with a namespace prefix like `settings.export.title` use that namespace.
-- Keys without a namespace default to `common`.
-- Missing translations fall back to English, then to the provided fallback string, then to the key.
+## ✅ Workflow
 
-## Validate Locale Structure
+1. Pull the latest `main`.
+2. Add or update keys in `en/<file>.json`.
+3. Add the same keys to the other languages.
+4. Check the structure:
 
-Run:
+   ```bash
+   npm run i18n:check
+   ```
 
-```bash
-npm run i18n:check
-```
+   This reports missing files, missing keys, and extra keys compared to English.
 
-This checks for:
+5. Run the app with `npm run dev` and check the text in the UI.
+6. Open a pull request that lists the files you changed.
 
-- Missing namespace files
-- Missing keys compared to `en`
-- Extra keys not present in `en`
-
-## Contributor Workflow
-
-1. Pull latest `main`.
-2. Update `en/<namespace>.json` with new keys if needed.
-3. Add matching keys to other locale files.
-4. Run `npm run i18n:check`.
-5. Run app locally (`npm run dev`) and spot-check UI text.
-6. Open PR with a short summary of changed namespaces.
-
-## Scope Notes
-
-Current framework is app-wide and ready for full localization rollout.
-Not every UI string is migrated yet. Migration should be done incrementally by namespace to keep PRs reviewable and low-risk.
+> [!NOTE]
+> Not every UI string uses translations yet. Move strings over one file at a time to keep pull requests small and easy to review.

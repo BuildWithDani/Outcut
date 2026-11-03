@@ -1,6 +1,12 @@
 # Onboarding
 
-Onboarding has two carousel pages: Account and Permissions, selected with the bottom pagination buttons. The Outcut AI logo sits above the title on each page. Account requires a non-anonymous Supabase session; there is no skip action. The shared banner uses
-`public/auth/login-banner.png` in `src/components/auth/OnboardingLayout.tsx`. It grows into the space left by the current page’s content and shrinks to a minimum height in short windows, keeping the form scrollable and the bottom navigation visible.
-Permission controls and the final Start recording action live in
-`src/components/auth/OnboardingPermissions.tsx`.
+Onboarding is a two-page carousel, **Account** and **Permissions**, switched with the pagination buttons at the bottom. The Outcut AI logo sits above the title on each page.
+
+| Part | File |
+| --- | --- |
+| Layout and banner | `src/components/auth/OnboardingLayout.tsx` |
+| Permission controls and **Start recording** | `src/components/auth/OnboardingPermissions.tsx` |
+| Banner image | `public/auth/login-banner.png` |
+
+- Signing in is optional. Users can close onboarding with **X**, **Escape**, or **Continue without an account**.
+- The banner fills the space the page content leaves free, and shrinks to a minimum height in short windows. The form stays scrollable and the bottom navigation stays visible.

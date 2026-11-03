@@ -1,25 +1,30 @@
-# Clip sequence timing
+# Timeline Clip Sequence
 
-Primary footage is an ordered, contiguous sequence. A visual clip separator has no duration. Both sides of a cut at 2.8 seconds represent 2.8 seconds, even if the second clip starts at a different point in the source recording.
+The main footage track is an ordered, **gap-free** sequence of clips. A clip separator has no duration. If you cut at 2.8 seconds, both sides meet at exactly 2.8 seconds on the timeline, even when the second clip starts somewhere else in the source recording.
 
-- `ClipRegion.startMs/endMs`: edited timeline coordinates.
-- `sourceStartMs`: the retained recording in-point. Packing or reordering never derives this from the new timeline position.
-- `speed`: source milliseconds consumed per timeline millisecond.
-- `clipSequence.ts`: packs trims/deletes/speed changes, handles explicit insertion indices, and maps connected effects and audio anchors.
-- `timeline/core/clipPresentation.ts`: maps media time into inset clip rectangles and back. Scrubbing a separator returns its cut timestamp. The playhead does not wait or animate through a separator.
+## 🧩 Data model
 
-Clip resizing is constrained by available source footage and minimum clip duration, rather than collision with the next clip. Dragging a clip chooses an insertion index rather than looking for empty space. Source-based captions are reprojected from their original cues. Imported audio retains its duration as its anchor moves. Annotation selection is independent of whether the annotation is visible at the current playhead time.
+| Field / module | Meaning |
+| --- | --- |
+| `ClipRegion.startMs` / `endMs` | Position on the edited timeline |
+| `sourceStartMs` | Where the clip starts in the source recording. Packing or reordering never changes it |
+| `speed` | Source milliseconds played per timeline millisecond |
+| `clipSequence.ts` | Packs trims, deletes, and speed changes. Handles insertion points, and remaps connected effects and audio |
+| `timeline/core/clipPresentation.ts` | Converts between media time and clip rectangles on screen. Scrubbing a separator returns its cut time; the playhead never pauses on it |
 
-Legacy projects with primary-track gaps are normalized before establishing the loaded undo baseline. Editing and export use the same contiguous clip positions.
+## ✂️ Editing behavior
 
-## Verification
+- **Resizing** a clip is limited by the available source footage and the minimum clip length, not by the next clip.
+- **Dragging** a clip picks an insertion point instead of looking for empty space.
+- **Captions** created from the source are re-mapped from their original cues.
+- **Imported audio** keeps its length when its anchor moves.
+- **Annotations** can be selected even when they aren't visible at the current playhead time.
+- **Older projects** with gaps on the main track are closed up when they load, before the undo history starts. Editing and export use the same clip positions.
 
-135 focused unit tests passed for sequence packing/rippling, persistence, drag and resize resolution, visual seam mapping, playback, annotation visibility and deletion shortcuts. All 13 renderer regressions passed for block deletion, dragged annotation selection, background transitions, gap-free trims, clip reordering, and connected annotation/audio undo. These browser checks use fixture media and a mocked Electron bridge.
+## 🧲 Snapping and preview
 
-## Boundary snapping and preview motion
-
-Timeline effects use the same media-to-display mapping as clips and the playhead. Dragging or resizing a zoom, annotation, caption, or audio block snaps within 8 screen pixels of other block boundaries, including clip cuts, at every timeline zoom level. Dragging preserves the block duration. Moving beyond that distance releases the snap. Zoom blocks can span visual separators continuously.
-
-Hover previews and caption placement use the same inverse mapping. Keyframe positions and playhead snapping use media time consistently. Source-video seeks at contiguous cuts preserve camera springs; explicit timeline seeks still snap to the requested frame.
-
-Caption visibility was checked in the real renderer with fixture footage at 1×, 2× and 4×, including source-frame matching, cue visibility boundaries and moving playback. The caption test captures the preview at 2×. This verifies rendering and timing, not speech-recognition accuracy or a packaged export.
+- Zoom, annotation, caption, and audio blocks snap to other block edges, including clip cuts, within **8 screen pixels** at any zoom level. Moving further away releases the snap.
+- Dragging a block keeps its duration.
+- Zoom blocks can span clip separators.
+- Hover previews, caption placement, keyframes, and playhead snapping all use the same time mapping as clips.
+- Seeking across a cut keeps camera motion smooth. An explicit seek on the timeline still lands on the exact frame.

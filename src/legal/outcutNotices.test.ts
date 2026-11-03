@@ -9,10 +9,20 @@ function read(rel: string) {
 }
 
 describe("Outcut legal and product identity notices", () => {
-	it("keeps AGPL license body and required copyright layering", () => {
-		const license = read("LICENSE.md");
+	it("keeps the full AGPL text in LICENSE", () => {
+		const license = read("LICENSE");
 		expect(license).toContain("GNU AFFERO GENERAL PUBLIC LICENSE");
+		expect(license).toContain("END OF TERMS AND CONDITIONS");
+	});
+
+	it("keeps Recordly terms, OpenScreen MIT notice and copyright layering in LICENSE.md", () => {
+		const license = read("LICENSE.md");
+		expect(license).toContain("GNU Affero General Public License v3.0");
 		expect(license).toContain("Copyright (C) 2026 webadderall");
+		expect(license).toContain("Copyright (c) 2025 Siddharth Vaddem");
+		expect(license).toContain('You CANNOT use the "Recordly" name or branding');
+		expect(license).toContain("you must attribute Recordly in the user-facing UI and the repo");
+		expect(license).toContain("Permission is hereby granted, free of charge");
 		expect(license).toContain("BuildWithDani");
 		expect(license).toContain("Outcut AI");
 	});

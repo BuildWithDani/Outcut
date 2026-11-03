@@ -1,69 +1,51 @@
-# Upstream provenance
+# Upstream
 
-## Outcut AI
+Outcut AI is part of a family of open-source screen recorders. This page explains where the code comes from and what stays compatible with upstream.
 
-- Project: Outcut AI
-- Maintainer: BuildWithDani
-- Repository: https://github.com/BuildWithDani/Outcut
-- License: GNU Affero General Public License v3.0 (AGPL-3.0)
+```text
+OpenScreen (MIT, 2025)  ──►  Recordly (AGPL-3.0, 2026)  ──►  Outcut AI (AGPL-3.0, 2026)
+Siddharth Vaddem             webadderall                     BuildWithDani
+```
 
-## Immediate upstream: Recordly
+| | Outcut AI | Recordly | OpenScreen |
+| --- | --- | --- | --- |
+| **Maintainer** | BuildWithDani | webadderall | Siddharth Vaddem |
+| **Repository** | [BuildWithDani/Outcut](https://github.com/BuildWithDani/Outcut) | [webadderallorg/Recordly](https://github.com/webadderallorg/Recordly) | [siddharthvaddem/openscreen](https://github.com/siddharthvaddem/openscreen) |
+| **License** | AGPL-3.0 | AGPL-3.0 with additional terms in [`LICENSE.md`](./LICENSE.md) | MIT |
 
-- Project: Recordly
-- Author: webadderall
-- Repository: https://github.com/webadderallorg/Recordly
-- License: AGPL-3.0 (with additional trademark/attribution terms in `LICENSE.md`)
-- Verified source commit for the Outcut rebrand base: `109ca3a13c362e969d9add25d1f93406c36dba2a`  
-  (`Merge pull request #1147 from webadderallorg/codex/mac-audio-gap-timing`)
+**Base commit:** Recordly `109ca3a13c362e969d9add25d1f93406c36dba2a` (`Merge pull request #1147 from webadderallorg/codex/mac-audio-gap-timing`).
 
-Outcut AI preserves Recordly’s eligible recorder, editor, timeline, webcam, cursor, export, settings, extensions, and project workflows. Subsequent Outcut commits add branding, documentation, packaging identity, dismissible onboarding, teal theme tokens, and repository cleanup — not a second editor.
+Outcut AI keeps Recordly's recorder, editor, timeline, webcam, cursor, export, settings, and project workflows. Outcut AI's own changes add branding, documentation, packaging identity, dismissible onboarding, the teal theme, and repository cleanup.
 
-## Earlier upstream: OpenScreen
+## 🔗 Compatibility contracts
 
-- Project: OpenScreen
-- Author: Siddharth Vaddem (2025)
-- Repository: https://github.com/siddharthvaddem/openscreen
-- License: MIT
-
-Recordly originally started as a fork of OpenScreen. OpenScreen attribution and MIT terms remain in `LICENSE.md`.
-
-## Compatibility contracts (intentionally preserved)
+These identifiers keep their Recordly names on purpose, so existing projects and setups keep working.
 
 | Area | Status |
 | --- | --- |
-| `.recordly` project files | Preserved for open/save compatibility |
-| `recordly.*` localStorage / settings keys | Preserved |
-| Auth deep-link schemes `recordly://` / `recordly-dev://` | Preserved for existing redirect configuration; `outcut://` is also registered |
-| MIME / UTI `dev.recordly.app.project` | Preserved for document-type continuity |
-| Native helper binary names (`recordly-*-helper`, `recordly-gpu-export`, …) | Preserved where packaging and spawn paths depend on them |
-| Internal TypeScript symbols | Auth module, sign-in dialog and branding constants renamed to Outcut; others preserved where rename churn has no user benefit |
-| `services/recordly-share` | Retained as optional upstream-compatible share worker; not an official Outcut Cloud |
+| `.recordly` project files | Kept so projects open and save the same way |
+| `recordly.*` localStorage and settings keys | Kept |
+| Auth deep links `recordly://` and `recordly-dev://` | Kept for existing redirect setups; `outcut://` is also registered |
+| MIME / UTI `dev.recordly.app.project` | Kept so file associations keep working |
+| Native helper names (`recordly-*-helper`, `recordly-gpu-export`, …) | Kept where packaging and process launch depend on them |
+| Internal TypeScript symbols | Auth module, sign-in dialog, and branding constants are renamed to Outcut. Others are kept where renaming brings no user benefit |
+| `services/recordly-share` | Kept as an optional, upstream-compatible share worker. It is not an official Outcut Cloud |
 
-## Cloud / authentication
+## ☁️ Cloud and accounts
 
-Local recording, editing, save/open, and export do **not** require an Outcut account.
+You don't need an account to record, edit, save, open, or export.
 
-Optional sign-in UI remains for future Outcut Cloud and Recordly auth plumbing (Supabase client, magic-link templates, share worker). Until Outcut operates authorized cloud endpoints:
+The optional sign-in UI stays in place for a future Outcut Cloud. Until BuildWithDani runs its own cloud services:
 
-- Do not present Recordly-owned cloud URLs as official Outcut services
-- Treat cloud account features as optional / future
-- Welcome onboarding is dismissible via **X**, **Escape**, or **Continue without an account**
+- Recordly-owned cloud URLs are not official Outcut services
+- Cloud account features are optional and future work
+- Onboarding can be dismissed with **X**, **Escape**, or **Continue without an account**
 
-## Remotes
+See [`docs/EXTERNAL_SERVICES.md`](./docs/EXTERNAL_SERVICES.md) for every external service.
 
-- History retained from `https://github.com/webadderallorg/Recordly`
-- Destination repository: `https://github.com/BuildWithDani/Outcut`
+## 🎨 Branding assets
 
-## Active Git history note
-
-The default branch may use a fresh import commit that preserves this source tree without replaying upstream commit parents. Full Recordly-derived ancestry remains on archive refs (`archive/outcut-with-upstream-history`). Legal attribution in this file and `NOTICE.md` is unaffected.
-
-## External services
-
-See [docs/EXTERNAL_SERVICES.md](./docs/EXTERNAL_SERVICES.md) for the current service inventory.
-
-## Branding assets
-
-Canonical product mark: `assets/branding/outcut-logo.svg`  
-Generated icons: `public/app-icons/outcut-*.png`, `icons/icons/**` via `npm run icons:outcut`  
-Obsolete upstream icon sources under `branding/source-assets/` were removed after confirming the build uses the Outcut icon pipeline only.
+| Asset | Location |
+| --- | --- |
+| Canonical logo | `assets/branding/outcut-logo.svg` |
+| Generated icons | `public/app-icons/outcut-*.png`, `icons/icons/**` (run `npm run icons:outcut`) |

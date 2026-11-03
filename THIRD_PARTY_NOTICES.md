@@ -1,52 +1,51 @@
-# Third-party notices
+# Third-Party Notices
 
-Outcut AI redistributes the same third-party components as its Recordly upstream unless noted otherwise.
+Outcut AI includes the third-party components below, in addition to the npm packages listed in `package.json`.
+
+| Component | Used for | License | Copyright |
+| --- | --- | --- | --- |
+| [Voom](https://github.com/aritropaul/voom) | Share worker in `services/recordly-share/worker` | MIT | © 2026 Aritro Paul |
+| [Solar Icon Set](https://github.com/480-Design/Solar-Icon-Set) | App icons, rendered with `@solar-icons/react` (MIT) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | 480 Design |
+| [DM Sans](https://github.com/googlefonts/dm-fonts) | App typeface | [SIL OFL 1.1](./src/assets/fonts/dm-sans/OFL.txt) | © 2014 The DM Sans Project Authors |
 
 ## Voom
 
-Outcut AI / Recordly Share includes code adapted from the Voom project:
+The share worker is adapted from Voom at upstream commit `c1c0350ed610b0c9bc4a307fcc6a01aab0f926f9`.
+Recordly added product branding, desktop publishing, authenticated comments, local development setup, and viewer styling. Outcut AI also rebrands user-facing share pages that are built from source.
 
-- Project: [Voom](https://github.com/aritropaul/voom)
-- Adapted component: `services/recordly-share/worker`
-- License: MIT
-- Copyright © 2026 Aritro Paul
-- Upstream reference: `c1c0350ed610b0c9bc4a307fcc6a01aab0f926f9`
+<details>
+<summary><strong>View the Voom MIT License</strong></summary>
 
-Upstream Recordly changes include product branding, desktop publishing integration,
-authenticated commenting, local-development configuration, and viewer styling.
-Outcut AI additionally rebrands user-facing Share UI strings where those pages are built from source.
+```text
+MIT License
 
-The Voom software is provided under the following license:
+Copyright (c) 2026 Aritro Paul
 
-> MIT License
->
-> Copyright (c) 2026 Aritro Paul
->
-> Permission is hereby granted, free of charge, to any person obtaining a copy
-> of this software and associated documentation files (the "Software"), to deal
-> in the Software without restriction, including without limitation the rights
-> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-> copies of the Software, and to permit persons to whom the Software is
-> furnished to do so, subject to the following conditions:
->
-> The above copyright notice and this permission notice shall be included in all
-> copies or substantial portions of the Software.
->
-> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-> SOFTWARE.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+</details>
 
 ## Solar Icons
 
-Solar Icon Set by 480 Design, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-Source: https://github.com/480-Design/Solar-Icon-Set. Icons are rendered using the MIT-licensed `@solar-icons/react` package. The muted microphone adds a diagonal stroke.
+Solar Icon Set by 480 Design, licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The muted-microphone icon is modified with an added diagonal stroke.
 
 ## DM Sans
 
-Copyright 2014 The DM Sans Project Authors (https://github.com/googlefonts/dm-fonts).
-
-DM Sans is licensed under the SIL Open Font License, Version 1.1. The unmodified regular and italic variable fonts are sourced from [Google Fonts](https://github.com/google/fonts/tree/main/ofl/dmsans). The full license is included in [src/assets/fonts/dm-sans/OFL.txt](src/assets/fonts/dm-sans/OFL.txt).
+DM Sans is licensed under the SIL Open Font License 1.1. The unmodified regular and italic variable fonts come from [Google Fonts](https://github.com/google/fonts/tree/main/ofl/dmsans). The full license is in [`src/assets/fonts/dm-sans/OFL.txt`](./src/assets/fonts/dm-sans/OFL.txt).

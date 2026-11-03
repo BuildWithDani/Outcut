@@ -1,17 +1,36 @@
-# Hosted sharing
+# Hosted Mode
 
-Self-hosting remains the default. Hosted sharing requires a separate operator-owned Wrangler configuration; do not commit account IDs, staging users, credentials, or real deployment URLs.
+Self-hosting for a single owner is the default. **Hosted mode** lets many verified accounts each keep their own library.
 
-Configure the existing `DB`, `VIDEOS_BUCKET`, and `ASSETS` bindings and scheduled cleanup trigger as in `wrangler.jsonc`, then add:
+> [!CAUTION]
+> Keep hosted settings in your own Wrangler configuration. Never commit account IDs, user IDs, credentials, or real deployment URLs.
 
-- `HOSTED_MODE` set to `true`.
-- `SUPABASE_URL` set to the HTTPS auth project URL.
-- `SUPABASE_PUBLISHABLE_KEY` set to that project's publishable key. Never use a service-role key.
-- `REQUEST_RATE_LIMIT` and `ACCOUNT_RATE_LIMIT` Cloudflare rate-limiter bindings. Hosted requests fail closed without both. Choose separate namespaces and limits suitable for video playback and multipart uploads.
-- Optionally `STAGING_ALLOWED_USER_ID` to restrict a staging deployment to one verified user. Leave unset for general hosted access.
+## ⚙️ Configuration
 
-Existing databases are upgraded by `ensureSchema`; migrations 0008 and 0009 also describe the owner and upload-session schema. Legacy recordings without an owner do not appear in authenticated hosted libraries. Do not infer ownership from client-provided fields.
+Keep the `DB`, `VIDEOS_BUCKET`, and `ASSETS` bindings and the scheduled cleanup trigger from `wrangler.jsonc`, then add:
 
-Deploy the worker before configuring desktop `VITE_CLOUD_SHARE_ENDPOINT` to its HTTPS `/api/upload` URL. Production builds default to cloud sharing unavailable when no endpoint is configured.
+| Setting | Value |
+| --- | --- |
+| `HOSTED_MODE` | `true` |
+| `SUPABASE_URL` | The HTTPS URL of your auth project |
+| `SUPABASE_PUBLISHABLE_KEY` | That project's publishable key. Never a service-role key |
+| `REQUEST_RATE_LIMIT`, `ACCOUNT_RATE_LIMIT` | Cloudflare rate-limit bindings. Hosted requests are refused without both |
+| `STAGING_ALLOWED_USER_ID` (optional) | Limits a staging deployment to one verified user |
 
-Verified accounts can hold five recordings, including pending uploads, with a maximum of 1,000,000,000 bytes each and fourteen-day expiry. These are the current free limits; this change does not implement paid entitlements. Scheduled cleanup removes expired recordings and abandoned uploads. Test with an isolated database and bucket before production rollout.
+Deploy the Worker first. Then set `VITE_CLOUD_SHARE_ENDPOINT` in the desktop build to its HTTPS `/api/upload` URL. Without an endpoint, production builds show cloud sharing as unavailable.
+
+## 📏 Free limits
+
+| Limit | Value |
+| --- | --- |
+| Recordings per account | 5, including pending uploads |
+| Size per recording | 1,000,000,000 bytes |
+| Expiry | 14 days |
+
+Scheduled cleanup removes expired recordings and abandoned uploads. Paid plans are not implemented.
+
+## 🗄️ Database
+
+`ensureSchema` upgrades existing databases. Migrations `0008` and `0009` add recording owners and upload sessions. Older recordings without an owner don't appear in hosted libraries, and ownership is never guessed from data the client sends.
+
+Test with a separate database and bucket before you roll out to production.

@@ -1,51 +1,44 @@
 # Security Policy
 
-## Supported versions
+Outcut AI keeps your recordings and projects on your own machine, and we take that trust seriously. 🔒
 
-Security fixes for Outcut AI are applied on the default branch of https://github.com/BuildWithDani/Outcut and on subsequently published release tags when maintainers cut them.
+## ✅ Supported versions
 
-Older unofficial builds, forks, and unverified installers are outside the supported set unless a maintainer explicitly states otherwise.
+| Version | Supported |
+| --- | :---: |
+| Latest release | ✅ |
+| `main` branch | ✅ |
+| Older releases, forks, and unofficial builds | ❌ |
 
-## Reporting a vulnerability
+## 📬 Report a vulnerability
 
-Prefer GitHub Security Advisories for this repository:
+> [!CAUTION]
+> Please **do not** open a public issue for security problems.
 
-https://github.com/BuildWithDani/Outcut/security/advisories/new
-
-If advisories are unavailable, contact the [BuildWithDani](https://github.com/BuildWithDani) organization through GitHub and request a private channel. Do **not** open a public issue with exploit details, credentials, or private media.
+Report privately through **[GitHub Security Advisories](https://github.com/BuildWithDani/Outcut/security/advisories/new)**.
 
 Please include:
 
-- Affected platform (Windows / macOS / Linux)
-- Outcut AI version or commit SHA
-- Clear reproduction steps
-- Impact (confidentiality, integrity, availability)
-- Whether local project files, recordings, auth tokens, or clipboard/media paths are involved
+- Your platform (Windows, macOS, or Linux) and the Outcut AI version or commit
+- Steps to reproduce
+- The impact, and what data is exposed
 
-## Response expectations
+## 🔄 What happens next
 
-Maintainers will acknowledge valid reports when practical and coordinate disclosure after a fix or mitigation is available. There is **no guaranteed response-time SLA** in this document.
+1. We confirm we received your report.
+2. We investigate and work on a fix.
+3. We release the fix and credit you, unless you'd rather stay anonymous.
 
-## Privacy and local media
+This is a community project, so responses are best-effort and come without a guaranteed timeline.
+Issues that also affect Recordly may be shared with the upstream project once Outcut AI users are protected.
 
-Outcut AI stores recordings, project files, and editor state on the user’s machine. Treat local media paths, project JSON, and optional auth tokens as sensitive. Reports involving:
+## 🎯 Scope
 
-- Path traversal or arbitrary file write during import/export
-- Unsafe deserialization of project or extension payloads
-- Credential leakage in logs, updater channels, or auth redirects
-- Privilege issues in native capture helpers
+| In scope | Out of scope |
+| --- | --- |
+| Path traversal or unsafe file writes during import or export | Attacks that need physical access to an unlocked machine |
+| Unsafe parsing of project files or extensions | Social engineering outside the app |
+| Leaked tokens or credentials in logs, updates, or auth redirects | Denial of service from intentionally huge media files |
+| Privilege issues in native capture helpers | Feature requests filed as security issues |
 
-…are especially valuable.
-
-Optional cloud and share-worker code may still reference upstream Recordly-era infrastructure. Do not treat Recordly-owned endpoints as official Outcut production services. See [docs/EXTERNAL_SERVICES.md](./docs/EXTERNAL_SERVICES.md). Vulnerabilities that also affect upstream Recordly may be shared upstream at https://github.com/webadderallorg/Recordly after Outcut users are protected, when appropriate.
-
-## Out of scope (examples)
-
-- Issues that require physical access to an unlocked machine with the user’s project directory already open
-- Social-engineering of end users outside the application
-- Denial of service via intentionally enormous media files without a security boundary bypass
-- Feature requests filed as security issues
-
-## Future agent tools
-
-When AI Director 2.0 or bring-your-own-agent tooling lands, treat agent tool permissions, prompt injection against local files, and secret exfiltration as first-class security concerns. Until that code ships, speculative agent attack reports should target the design discussion rather than claiming a shipped vulnerability.
+Optional cloud and sharing code may still point at upstream Recordly services. Those are not official Outcut services. See [docs/EXTERNAL_SERVICES.md](./docs/EXTERNAL_SERVICES.md).

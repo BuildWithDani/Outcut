@@ -1,9 +1,7 @@
-# Golden Gate cursor artwork
+# Golden Gate Cursors
 
-The three hand cursors are vector conversions of the macOS 27.2 system PDFs under
-`ApplicationServices.framework/Frameworks/HIServices.framework/Resources/cursors/macos27`.
-Converted with Poppler `pdftocairo -svg`; the 32-by-32 canvas is preserved.
-Hotspots come from each cursor's accompanying `info.plist`:
+Vector versions of three macOS 27.2 system hand cursors. They were converted with Poppler `pdftocairo -svg` from the PDFs in
+`ApplicationServices.framework/Frameworks/HIServices.framework/Resources/cursors/macos27`, and keep the original 32 × 32 canvas.
 
 | Cursor | Hotspot (points) |
 | --- | --- |
@@ -11,6 +9,6 @@ Hotspots come from each cursor's accompanying `info.plist`:
 | Open hand | 15, 16 |
 | Closed hand | 15, 16 |
 
-Golden Gate overrides these three cursors. Other states use the existing Tahoe
-artwork. The stored `tahoe` and `tahoe-inverted` style IDs remain compatible with
-saved projects; the editor displays Golden Gate and Golden Gate Inverted.
+Hotspots come from each cursor's `info.plist`.
+
+Golden Gate replaces only these three cursors. Every other state uses the Tahoe artwork. The saved style IDs `tahoe` and `tahoe-inverted` stay the same so existing projects still load. The editor labels them **Golden Gate** and **Golden Gate Inverted**.

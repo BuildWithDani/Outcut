@@ -1,19 +1,20 @@
-# Cloud sharing (optional / future)
+# Cloud Sharing
 
-Outcut AI can edit and export entirely offline. Cloud sharing code under `services/recordly-share` is retained for compatibility with upstream Recordly share-worker designs and for a future independently hosted Outcut Cloud.
+> [!NOTE]
+> Cloud sharing is **optional**. Exporting an MP4 or GIF is the supported way to share videos today.
 
-## Current policy
+The share worker in `services/recordly-share` stays in the repository for compatibility with Recordly and for a future, independently hosted Outcut Cloud.
 
-- Do not point production Outcut builds at Recordly-owned share endpoints unless BuildWithDani has explicit authorization and users are told what service they are using.
-- Local MP4/GIF export remains the supported sharing path for this open desktop foundation.
-- Account-gated share UI should degrade gracefully when cloud is unavailable (see in-app copy and [UPSTREAM.md](../UPSTREAM.md)).
+## 📋 Policy
 
-## Operator notes
+- Production Outcut builds must not use Recordly-owned share servers, unless BuildWithDani has explicit permission and users know which service they are using.
+- Share buttons must fail gracefully when no cloud service is configured.
+- The desktop app still accepts upstream-compatible share origins (`videos.recordly.dev`, the staging worker, and localhost) until Outcut Cloud exists. That doesn't make them official Outcut services.
 
-If you self-host the share worker:
+## 🛠️ Self-host the share worker
 
-1. Read `services/recordly-share/worker/README.md` and related staging/hosted docs.
-2. Configure your own Cloudflare / R2 / auth secrets.
-3. Update desktop environment variables to your deployment — never commit secrets.
+1. Follow the [share worker guide](../services/recordly-share/worker/README.md).
+2. Create your own Cloudflare Worker, R2 bucket, D1 database, and auth secrets.
+3. Point `VITE_CLOUD_SHARE_ENDPOINT` in your desktop build at your deployment's `/api/upload` URL.
 
-AI Director 2.0 and managed AI services are out of scope for this document until those features ship.
+Never commit secrets or account IDs to the repository.

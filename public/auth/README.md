@@ -1,8 +1,10 @@
-# Official provider logos
+# Provider Logos
 
-Unmodified standalone color logos displayed inside HeroUI buttons; labels and controls belong to Outcut AI.
+Official, unmodified color logos shown inside the sign-in buttons. The button labels and controls belong to Outcut AI.
 
-- `google-logo.png`: https://developers.google.com/static/identity/images/g-logo.png — linked by https://developers.google.com/identity/branding-guidelines
-- `microsoft-logo.svg`: https://learn.microsoft.com/en-us/entra/identity-platform/media/howto-add-branding-in-apps/ms-symbollockup_mssymbol_19.svg — linked by https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-branding-in-apps
+| File | Source | Guidelines |
+| --- | --- | --- |
+| `google-logo.png` | [Google G logo](https://developers.google.com/static/identity/images/g-logo.png) | [Google branding guidelines](https://developers.google.com/identity/branding-guidelines) |
+| `microsoft-logo.svg` | [Microsoft symbol](https://learn.microsoft.com/en-us/entra/identity-platform/media/howto-add-branding-in-apps/ms-symbollockup_mssymbol_19.svg) | [Microsoft branding guidelines](https://learn.microsoft.com/en-us/entra/identity-platform/howto-add-branding-in-apps) |
 
-Downloaded September 23, 2026. Trademarks belong to the respective providers. Preserve original colors and aspect ratio.
+Downloaded September 23, 2026. Each logo is a trademark of its provider. Keep the original colors and aspect ratio.

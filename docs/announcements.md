@@ -1,14 +1,17 @@
-# In-app announcements
+# In-App Announcements
 
-Outcut AI can show dismissible announcements in the editor as a popup, carousel slide, lightweight live notification, or header banner. Popups can contain images or video; notifications and banners are text-only with optional buttons.
+Outcut AI can show dismissible announcements in the editor without a new app release.
 
-## Remote announcements
+| Style | Can include |
+| --- | --- |
+| **Popup** | Text, images, or video, plus buttons |
+| **Carousel slide** | Several pages in one popup |
+| **Notification** | Short text with optional buttons |
+| **Header banner** | Short text with optional buttons |
 
-Edit [`announcements.json`](../announcements.json) on the default branch to publish an announcement without releasing a new app version. Released clients check the raw GitHub file at most once every six hours per running app instance. Fetch failures are silent and never block startup.
+## 📣 Publishing an announcement
 
-Use Outcut AI naming in titles and bodies. Do not present Recordly-owned marketing URLs as official Outcut destinations.
-
-Example shape:
+Edit [`announcements.json`](../announcements.json) on the default branch. Released apps check that file on GitHub at most once every six hours. If the check fails, nothing happens and startup is never blocked.
 
 ```json
 {
@@ -35,4 +38,9 @@ Example shape:
 }
 ```
 
-Keep announcement media URLs on infrastructure you control. Avoid committing large temporary verification screenshots into this repository; attach them to pull requests or CI artifacts instead.
+## ✅ Guidelines
+
+- Use Outcut AI naming in titles and text.
+- Host images and video on infrastructure you control.
+- Don't link to Recordly-owned marketing pages as if they were Outcut pages.
+- Don't commit large screenshots for testing. Attach them to pull requests instead.
