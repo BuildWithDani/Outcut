@@ -53,3 +53,17 @@ Optional sign-in UI remains for future Outcut Cloud and Recordly auth plumbing (
 
 - History retained from `https://github.com/webadderallorg/Recordly`
 - Destination repository: `https://github.com/BuildWithDani/Outcut`
+
+## Active Git history note
+
+The default branch may use a fresh import commit that preserves this source tree without replaying upstream commit parents. Full Recordly-derived ancestry remains on archive refs (`archive/outcut-with-upstream-history`). Legal attribution in this file and `NOTICE.md` is unaffected.
+
+## External services
+
+See [docs/EXTERNAL_SERVICES.md](./docs/EXTERNAL_SERVICES.md) for the current service inventory.
+
+## Branding assets
+
+Canonical product mark: `assets/branding/outcut-logo.svg`  
+Generated icons: `public/app-icons/outcut-*.png`, `icons/icons/**` via `npm run icons:outcut`  
+Obsolete upstream icon sources under `branding/source-assets/` were removed after confirming the build uses the Outcut icon pipeline only.

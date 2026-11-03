@@ -1,6 +1,6 @@
 # Contributing to Outcut AI
 
-Thank you for helping improve Outcut AI. This project is maintained by [BuildWithDani](https://github.com/BuildWithDani) and includes substantial code derived from Recordly and OpenScreen. Please keep attribution accurate and product branding consistent.
+Thank you for helping improve Outcut AI. This project is maintained by [BuildWithDani](https://github.com/BuildWithDani) and includes substantial code derived from Recordly and OpenScreen. Keep attribution accurate and product branding consistent.
 
 ## Report an issue
 
@@ -23,9 +23,13 @@ Use the feature-request issue template. Prefer concrete workflows over slogans. 
 ```bash
 git clone https://github.com/BuildWithDani/Outcut.git
 cd Outcut
-npm install --legacy-peer-deps
+npm install
 npm run dev
 ```
+
+Prefer cloning into a folder named `Outcut` (not `Recordly`). In Cursor or VS Code, open [`Outcut.code-workspace`](./Outcut.code-workspace) so the window title shows **Outcut AI**.
+
+`.npmrc` enables `legacy-peer-deps=true` so local installs match GitHub Actions (`npm ci`).
 
 Common checks:
 
@@ -54,11 +58,12 @@ Native helpers may require Rust and platform SDKs. Prefer reproducing capture/ex
 - Do not modify `assets/branding/outcut-logo.svg` geometry, gradient, or colors.
 - Preserve compatibility contracts listed in [UPSTREAM.md](./UPSTREAM.md) (`.recordly` projects, `recordly.*` settings keys, auth schemes) unless you ship a tested migration.
 - Do not connect contributors’ builds to Recordly-owned production cloud endpoints as if they were Outcut Cloud.
+- Do not invent Outcut Cloud billing or AI Director 2.0 behavior in cleanup PRs.
 
 ## Tests and pull requests
 
 1. Fork https://github.com/BuildWithDani/Outcut (or push a branch if you have write access).
-2. Create a branch named for the change (`fix/…`, `feat/…`, `docs/…`).
+2. Create a branch named for the change (`fix/…`, `feat/…`, `docs/…`, `chore/…`).
 3. Run typecheck, lint, and the tests relevant to your change.
 4. Open a pull request against the default branch (`main`).
 5. Describe the problem, the approach, and how you validated it.
@@ -79,12 +84,6 @@ AI tools may be used to draft or edit patches. Contributors remain responsible f
 - Preserving licenses, notices, and upstream attribution
 - Avoiding blind search-and-replace across product identity or persisted formats
 
-Do not add fabricated co-author trailers or misattribute upstream work.
+## Community standards
 
-## Release workflow
-
-Maintainers cut releases from GitHub Releases and the workflows under `.github/workflows/`. Contributors should not publish installers from forks under the Outcut AI name without coordination. See [RELEASING.md](./RELEASING.md) when present and current.
-
-## Upstream relationship
-
-Outcut AI is derived from [Recordly](https://github.com/webadderallorg/Recordly) (AGPL-3.0), which started from [OpenScreen](https://github.com/siddharthvaddem/openscreen) (MIT). Keep credits and legal files intact. See [NOTICE.md](./NOTICE.md) and [UPSTREAM.md](./UPSTREAM.md).
+Be respectful. Harassment, spam, and bad-faith contribution dumps will be rejected.

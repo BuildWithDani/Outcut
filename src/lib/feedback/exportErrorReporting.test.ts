@@ -22,7 +22,7 @@ it("keeps both decoder failures and allowlists numerical positions without uploa
 	expect(combined.message).toContain("Source corruption is not confirmed");
 	expect(combined.cause).toEqual({ initial: first, software: second });
 	const report = buildExportErrorReport(
-		`${combined.message}\nFailure stage: Input video decoding\nOutput: 1920x1080 @ 30 FPS\nPlatform: Windows\nRecordly version: 1.4.0`,
+		`${combined.message}\nFailure stage: Input video decoding\nOutput: 1920x1080 @ 30 FPS\nPlatform: Windows\nOutcut AI version: 1.4.0`,
 		"paid",
 		"mp4",
 	);

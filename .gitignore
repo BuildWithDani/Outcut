@@ -63,3 +63,7 @@ electron/native/bin/win32-x64/SDL2.dll
 electron/native/bin/win32-x64/ggml*.dll
 electron/native/bin/win32-x64/whisper.dll
 
+
+# Optional share-worker web build output (build locally when needed)
+services/recordly-share/worker/web/dist/
+

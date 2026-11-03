@@ -217,7 +217,7 @@ function closeEditorWindowToHud(window: BrowserWindow | null) {
 
 	// The HUD renderer normally remains hidden while the editor is open so
 	// recording finalization can continue. Restore that HUD before destroying
-	// the editor, keeping Recordly in its ready-to-record state on the taskbar.
+	// the editor, keeping Outcut AI in its ready-to-record state on the taskbar.
 	window.hide();
 	if (mainWindow === window) {
 		mainWindow = null;
@@ -572,7 +572,7 @@ function createTray() {
 }
 
 function shouldUseTray() {
-	// macOS and Windows expose Recordly through their Dock/taskbar. Keep the
+	// macOS and Windows expose Outcut AI through their Dock/taskbar. Keep the
 	// tray entry only on Linux, where it remains the primary app entry point.
 	return process.platform === "linux";
 }
@@ -961,7 +961,7 @@ app.whenReady().then(async () => {
 		},
 	);
 
-	// Recordly does not use WebHID, Web Serial, or WebUSB. Do not grant devices by default.
+	// Outcut AI does not use WebHID, Web Serial, or WebUSB. Do not grant devices by default.
 	session.defaultSession.setDevicePermissionHandler(() => false);
 
 	// macOS prompts for camera and microphone access at the point of use. Asking

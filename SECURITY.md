@@ -26,9 +26,9 @@ Please include:
 
 Maintainers will acknowledge valid reports when practical and coordinate disclosure after a fix or mitigation is available. There is **no guaranteed response-time SLA** in this document.
 
-## Scope notes
+## Privacy and local media
 
-Outcut AI handles local media, project files, optional authentication clients, and (in the future) agent/tool integrations. Reports that involve:
+Outcut AI stores recordings, project files, and editor state on the user’s machine. Treat local media paths, project JSON, and optional auth tokens as sensitive. Reports involving:
 
 - Path traversal or arbitrary file write during import/export
 - Unsafe deserialization of project or extension payloads
@@ -37,7 +37,7 @@ Outcut AI handles local media, project files, optional authentication clients, a
 
 …are especially valuable.
 
-Optional cloud and share-worker code may still reference upstream Recordly-era infrastructure. Do not treat Recordly-owned endpoints as official Outcut production services. Vulnerabilities that also affect upstream Recordly may be shared upstream at https://github.com/webadderallorg/Recordly after Outcut users are protected, when appropriate.
+Optional cloud and share-worker code may still reference upstream Recordly-era infrastructure. Do not treat Recordly-owned endpoints as official Outcut production services. See [docs/EXTERNAL_SERVICES.md](./docs/EXTERNAL_SERVICES.md). Vulnerabilities that also affect upstream Recordly may be shared upstream at https://github.com/webadderallorg/Recordly after Outcut users are protected, when appropriate.
 
 ## Out of scope (examples)
 

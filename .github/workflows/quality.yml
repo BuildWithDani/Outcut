@@ -37,6 +37,7 @@ jobs:
 
       - name: Install dependencies
         id: install
+        # .npmrc sets legacy-peer-deps=true so this matches local installs.
         run: npm ci --ignore-scripts
 
       - name: Typecheck

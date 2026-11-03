@@ -1,0 +1,44 @@
+---
+description: Outcut AI Git commit identity and message policy (BuildWithDani)
+alwaysApply: true
+---
+
+# Outcut AI — Git Commit Identity Policy
+
+**Repository:** `BuildWithDani/Outcut` (this repo only)
+
+## Identity
+
+For commits made on the product owner's behalf in this repository:
+
+- Author/committer name: `BuildWithDani`
+- Author/committer email: the verified address configured in **this repo's local** Git config (`user.name` / `user.email`)
+- Do **not** change global Git settings
+- Do **not** invent email addresses
+- Keep author and committer attribution truthful
+
+## Commit messages
+
+Use professional conventional commits, for example:
+
+- `feat: …`
+- `fix: …`
+- `refactor: …`
+- `docs: …`
+- `chore: …`
+
+## Do not add
+
+- `Co-authored-by: Cursor`
+- `Co-authored-by: Claude`
+- `Co-authored-by: Codex`
+- Any AI-assisted / tool attribution trailers
+- Unnecessary assistant or tool signatures in the commit body
+
+Before committing: verify local `user.name` / `user.email` and the message. After committing: confirm GitHub shows BuildWithDani as author when that is the intended identity.
+
+## History safety
+
+- Do **not** rewrite, impersonate, or erase genuine third-party contributions
+- Do **not** force-push or amend already-published commits merely to change author names
+- Preserve legally required Recordly, OpenScreen, and other contributor copyright notices

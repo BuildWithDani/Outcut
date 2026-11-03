@@ -11,14 +11,14 @@ $ErrorActionPreference = "Stop"
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
 
 if (-not $AppPath) {
-	$packagedAppPath = Join-Path $repoRoot "release\win-unpacked\Recordly.exe"
-	$installedAppPath = Join-Path $env:LOCALAPPDATA "Programs\recordly\Recordly.exe"
+	$packagedAppPath = Join-Path $repoRoot "release\win-unpacked\OutcutAI.exe"
+	$installedAppPath = Join-Path $env:LOCALAPPDATA "Programs\Outcut AI\OutcutAI.exe"
 	if (Test-Path $packagedAppPath) {
 		$AppPath = $packagedAppPath
 	} elseif (Test-Path $installedAppPath) {
 		$AppPath = $installedAppPath
 	} else {
-		throw "Recordly.exe was not found. Build the Windows package first or pass -AppPath."
+		throw "OutcutAI.exe was not found. Build the Windows package first or pass -AppPath."
 	}
 }
 
@@ -27,7 +27,7 @@ if (-not $CudaScriptPath) {
 }
 
 if (-not (Test-Path $AppPath)) {
-	throw "Recordly app not found: $AppPath"
+	throw "Outcut AI app not found: $AppPath"
 }
 
 if (-not (Test-Path $CudaScriptPath)) {

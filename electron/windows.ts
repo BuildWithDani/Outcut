@@ -519,7 +519,7 @@ export function createHudOverlayWindow(): BrowserWindow {
 		backgroundColor: "#00000000",
 		resizable: false,
 		alwaysOnTop: true,
-		// The HUD is Recordly's persistent top-level window, so it owns the
+		// The HUD is Outcut AI's persistent top-level window, so it owns the
 		// Windows taskbar entry while auxiliary overlays stay hidden there.
 		...getHudOverlayTaskbarOptions(process.platform),
 		hasShadow: false,
@@ -560,7 +560,7 @@ export function createHudOverlayWindow(): BrowserWindow {
 		applyHudOverlayCaptureProtectionToWindow(win, hudOverlayHiddenFromCapture);
 		if (process.platform === "win32") {
 			// A focusable window is required for a Windows taskbar entry, but the
-			// always-on-top HUD must not steal focus when Recordly starts.
+			// always-on-top HUD must not steal focus when Outcut AI starts.
 			win.showInactive();
 		} else {
 			win.show();
@@ -782,7 +782,7 @@ export function createUpdateToastWindow(): BrowserWindow {
 
 	win.setVisibleOnAllWorkspaces(true, {
 		visibleOnFullScreen: true,
-		// Keep Recordly a foreground application so macOS does not temporarily
+		// Keep Outcut AI a foreground application so macOS does not temporarily
 		// remove its Dock icon while showing an overlay window.
 		skipTransformProcessType: process.platform === "darwin",
 	});
@@ -1147,7 +1147,7 @@ export function createCountdownWindow(): BrowserWindow {
 
 	win.setVisibleOnAllWorkspaces(true, {
 		visibleOnFullScreen: true,
-		// Keep Recordly a foreground application so macOS does not temporarily
+		// Keep Outcut AI a foreground application so macOS does not temporarily
 		// remove its Dock icon while showing the countdown.
 		skipTransformProcessType: process.platform === "darwin",
 	});
@@ -1286,7 +1286,7 @@ export function isCapturePickerWebContents(contents: WebContents): boolean {
 
 /**
  * Outlines the area being recorded. The outline sits just outside the recorded
- * rectangle and belongs to Recordly, which recordings exclude, so it never shows
+ * rectangle and belongs to Outcut AI, which recordings exclude, so it never shows
  * up in the video.
  */
 export function showAreaRecordingBorder(area: {
