@@ -36,7 +36,7 @@ Recordly originally started as a fork of OpenScreen. OpenScreen attribution and 
 | Auth deep-link schemes `recordly://` / `recordly-dev://` | Preserved for existing redirect configuration; `outcut://` is also registered |
 | MIME / UTI `dev.recordly.app.project` | Preserved for document-type continuity |
 | Native helper binary names (`recordly-*-helper`, `recordly-gpu-export`, …) | Preserved where packaging and spawn paths depend on them |
-| Internal TypeScript symbols (e.g. `RecordlySignInDialog`) | Preserved where rename churn has no user benefit |
+| Internal TypeScript symbols | Auth module, sign-in dialog and branding constants renamed to Outcut; others preserved where rename churn has no user benefit |
 | `services/recordly-share` | Retained as optional upstream-compatible share worker; not an official Outcut Cloud |
 
 ## Cloud / authentication
