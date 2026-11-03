@@ -11,7 +11,7 @@ import {
 	getHudOverlayWindow,
 	reassertHudOverlayMousePassthrough,
 } from "../../windows";
-import { ALLOW_RECORDLY_WINDOW_CAPTURE } from "../constants";
+import { ALLOW_OUTCUT_WINDOW_CAPTURE } from "../constants";
 import {
 	getNativeMacWindowSources,
 	resolveLinuxWindowBounds,
@@ -249,9 +249,8 @@ export async function getDesktopSources(
 				}
 
 				if (
-					ALLOW_RECORDLY_WINDOW_CAPTURE &&
-					(normalizedName.includes("recordly") ||
-						normalizedName.includes("outcut"))
+					ALLOW_OUTCUT_WINDOW_CAPTURE &&
+					(normalizedName.includes("recordly") || normalizedName.includes("outcut"))
 				) {
 					return true;
 				}
@@ -299,7 +298,7 @@ export async function getDesktopSources(
 				const normalizedAppName = normalizeDesktopSourceName(source.appName ?? "");
 
 				if (
-					!ALLOW_RECORDLY_WINDOW_CAPTURE &&
+					!ALLOW_OUTCUT_WINDOW_CAPTURE &&
 					normalizedAppName &&
 					normalizedAppName === ownAppName
 				) {
@@ -307,7 +306,7 @@ export async function getDesktopSources(
 				}
 
 				if (
-					ALLOW_RECORDLY_WINDOW_CAPTURE &&
+					ALLOW_OUTCUT_WINDOW_CAPTURE &&
 					(normalizedAppName === "recordly" ||
 						normalizedAppName === "outcut" ||
 						normalizedAppName === "outcut ai" ||
@@ -372,9 +371,8 @@ export async function getDesktopSources(
 				}
 
 				if (
-					ALLOW_RECORDLY_WINDOW_CAPTURE &&
-					(normalizedName.includes("recordly") ||
-						normalizedName.includes("outcut"))
+					ALLOW_OUTCUT_WINDOW_CAPTURE &&
+					(normalizedName.includes("recordly") || normalizedName.includes("outcut"))
 				) {
 					return true;
 				}

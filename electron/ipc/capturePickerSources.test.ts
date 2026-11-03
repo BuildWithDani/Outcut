@@ -54,7 +54,7 @@ describe("capture picker source adapters", () => {
 		]);
 		expect(mocks.dip).toHaveBeenCalledWith(null, expect.objectContaining({ x: -1600 }));
 	});
-	it("excludes Recordly's own macOS windows and invalid geometry", async () => {
+	it("excludes Outcut AI's own macOS windows and invalid geometry", async () => {
 		Object.defineProperty(process, "platform", { value: "darwin" });
 		mocks.mac.mockResolvedValue([
 			{ id: "window:1:0", ownerPid: process.pid, x: 0, y: 0, width: 10, height: 10 },

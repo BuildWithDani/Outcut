@@ -63,7 +63,7 @@ export function registerPermissionHandlers() {
 		}
 
 		try {
-			// First-time access must register Recordly in macOS before its settings row can be enabled.
+			// First-time access must register Outcut AI in macOS before its settings row can be enabled.
 			if (systemPreferences.getMediaAccessStatus("screen") === "not-determined") {
 				try {
 					await desktopCapturer.getSources({

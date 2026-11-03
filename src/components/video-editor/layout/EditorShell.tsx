@@ -1,8 +1,8 @@
 import { OnboardingController } from "@/components/auth/OnboardingController";
 import { AccountProfileContext } from "@/components/ui/account-avatar";
 import { DashboardSettingsContext } from "../dashboard/DashboardSettings";
-import { RecordlySignInDialog, type SignInReason } from "@/components/auth/RecordlySignInDialog";
-import { useRecordlyAuth } from "@/components/auth/useRecordlyAuth";
+import { OutcutSignInDialog, type SignInReason } from "@/components/auth/OutcutSignInDialog";
+import { useOutcutAuth } from "@/components/auth/useOutcutAuth";
 import { useVideoSourceRecovery } from "../hooks/useVideoSourceRecovery";
 import { useRecordingLibrary } from "../library/useRecordingLibrary";
 import { RecordingLibraryPanel } from "../library/RecordingLibraryPanel";
@@ -63,7 +63,7 @@ export function EditorShell(props: Props) {
 	const [signInOpen, setSignInOpen] = useState(false);
 	const [signInReason, setSignInReason] = useState<SignInReason>("account");
 	const [shareRequestNonce, setShareRequestNonce] = useState(0);
-	const auth = useRecordlyAuth();
+	const auth = useOutcutAuth();
 	const requestSignIn = (reason: SignInReason) => {
 		if (reason === "share" && auth.user) {
 			setShareRequestNonce((value) => value + 1);
@@ -210,7 +210,7 @@ export function EditorShell(props: Props) {
 		return (
 			<>
 				{getStartupView() === "home" ? <HomeLoadingSkeleton /> : <EditorLoadingSkeleton />}
-				<RecordlySignInDialog
+				<OutcutSignInDialog
 					open={signInOpen}
 					onOpenChange={setSignInOpen}
 					reason={signInReason}
@@ -241,7 +241,7 @@ export function EditorShell(props: Props) {
 						Open Projects
 					</Button>
 				</div>
-				<RecordlySignInDialog
+				<OutcutSignInDialog
 					open={signInOpen}
 					onOpenChange={setSignInOpen}
 					reason={signInReason}
@@ -449,7 +449,7 @@ export function EditorShell(props: Props) {
 					</div>
 				</div>
 			)}
-			<RecordlySignInDialog
+			<OutcutSignInDialog
 				open={signInOpen}
 				onOpenChange={setSignInOpen}
 				reason={signInReason}

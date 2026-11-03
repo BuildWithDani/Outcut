@@ -6,14 +6,14 @@ const callbackUrl = import.meta.env.DEV
 	? "http://127.0.0.1:43821/auth/callback"
 	: "recordly://auth/callback";
 
-export const recordlyAuthConfigured = Boolean(supabaseUrl && supabasePublishableKey);
+export const outcutAuthConfigured = Boolean(supabaseUrl && supabasePublishableKey);
 
-export type RecordlyOAuthProvider = "google" | "azure" | "github";
+export type OutcutOAuthProvider = "google" | "azure" | "github";
 
 export async function getEnabledSignInProviders(
 	signal?: AbortSignal,
-): Promise<RecordlyOAuthProvider[]> {
-	if (!recordlyAuthConfigured) return [];
+): Promise<OutcutOAuthProvider[]> {
+	if (!outcutAuthConfigured) return [];
 	const response = await fetch(`${supabaseUrl}/auth/v1/settings`, {
 		headers: { apikey: supabasePublishableKey! },
 		signal,
@@ -25,7 +25,7 @@ export async function getEnabledSignInProviders(
 	);
 }
 
-export const recordlyAuth = recordlyAuthConfigured
+export const outcutAuth = outcutAuthConfigured
 	? createClient(supabaseUrl!, supabasePublishableKey!, {
 			auth: {
 				flowType: "pkce",
@@ -37,12 +37,12 @@ export const recordlyAuth = recordlyAuthConfigured
 	: null;
 
 function requireAuth() {
-	if (!recordlyAuth) {
+	if (!outcutAuth) {
 		throw new Error(
 			"Outcut AI Auth is not configured. Add the Supabase URL and publishable key.",
 		);
 	}
-	return recordlyAuth;
+	return outcutAuth;
 }
 
 export async function signInWithEmail(email: string, password: string): Promise<User> {
@@ -106,14 +106,16 @@ async function exchangeAuthCallback(url: string): Promise<void> {
 	if (providerError) throw new Error(providerError);
 	const code = params.get("code");
 	if (!code) {
-		throw new Error("Request a new sign-in link from Outcut AI, then open it on this computer.");
+		throw new Error(
+			"Request a new sign-in link from Outcut AI, then open it on this computer.",
+		);
 	}
 	const client = requireAuth();
 	const { error } = await client.auth.exchangeCodeForSession(code);
 	if (error) throw error;
 }
 
-export async function signOutRecordly(): Promise<void> {
+export async function signOutOutcut(): Promise<void> {
 	const client = requireAuth();
 	const { error } = await client.auth.signOut();
 	if (error) throw error;
@@ -142,9 +144,9 @@ export async function requestAccountEmailChange(email: string): Promise<User> {
 	return data.user;
 }
 
-export async function hasRecordlySession(): Promise<boolean> {
-	if (!recordlyAuth) return false;
-	const { data, error } = await recordlyAuth.auth.getSession();
+export async function hasOutcutSession(): Promise<boolean> {
+	if (!outcutAuth) return false;
+	const { data, error } = await outcutAuth.auth.getSession();
 	return !error && Boolean(data.session?.user && !data.session.user.is_anonymous);
 }
 

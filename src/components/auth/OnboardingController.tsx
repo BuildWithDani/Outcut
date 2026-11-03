@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { User } from "@supabase/supabase-js";
 import { loadAppSetting, saveAppSetting } from "@/lib/appSettings";
-import { RecordlySignInDialog } from "./RecordlySignInDialog";
+import { OutcutSignInDialog } from "./OutcutSignInDialog";
 
 export const ONBOARDING_SEEN_KEY = "recordly.onboarding.v1.seen";
 
@@ -70,7 +70,7 @@ export function OnboardingController({
 	};
 
 	return (
-		<RecordlySignInDialog
+		<OutcutSignInDialog
 			onboarding
 			allowDismissWithoutAccount
 			startWithPermissions={startWithPermissions}

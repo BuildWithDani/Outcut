@@ -25,11 +25,11 @@ import {
 } from "@heroui/react";
 import {
 	getEnabledSignInProviders,
-	type RecordlyOAuthProvider,
+	type OutcutOAuthProvider,
 	sendSignInLink,
 	signInWithSocial,
-	signOutRecordly,
-} from "@/lib/auth/recordlyAuth";
+	signOutOutcut,
+} from "@/lib/auth/outcutAuth";
 
 const MotionDialog = motion.create(Modal.Dialog);
 
@@ -68,7 +68,7 @@ function friendlyAuthError(
 	return message;
 }
 
-export function RecordlySignInDialog({
+export function OutcutSignInDialog({
 	variant = "compact",
 	onboarding = false,
 	allowDismissWithoutAccount = false,
@@ -92,7 +92,7 @@ export function RecordlySignInDialog({
 	const [busy, setBusy] = useState<string>();
 	const [message, setMessage] = useState<string>();
 	const [linkSent, setLinkSent] = useState(false);
-	const [providers, setProviders] = useState<RecordlyOAuthProvider[]>([]);
+	const [providers, setProviders] = useState<OutcutOAuthProvider[]>([]);
 	const [loadingProviders, setLoadingProviders] = useState(false);
 
 	useEffect(() => {
@@ -285,7 +285,7 @@ export function RecordlySignInDialog({
 							isDisabled={disabled}
 							onPress={() =>
 								void run("signout", async () => {
-									await signOutRecordly();
+									await signOutOutcut();
 									onOpenChange(false);
 								})
 							}

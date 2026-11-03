@@ -28,7 +28,7 @@ vi.mock("../../appSettingsStore", () => ({ writeAppSetting: mocks.writeAppSettin
 vi.mock("../../windows", () => ({
 	setHudRecordingPreparationActive: mocks.setHudRecordingPreparationActive,
 }));
-vi.mock("../constants", () => ({ ALLOW_RECORDLY_WINDOW_CAPTURE: false }));
+vi.mock("../constants", () => ({ ALLOW_OUTCUT_WINDOW_CAPTURE: false }));
 vi.mock("../cursor/bounds", () => ({ stopWindowBoundsCapture: vi.fn() }));
 vi.mock("../recording/ffmpeg", () => ({}));
 vi.mock("../windowsWindowControl", () => ({}));

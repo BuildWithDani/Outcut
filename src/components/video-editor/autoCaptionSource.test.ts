@@ -22,7 +22,7 @@ describe("resolveAutoCaptionSourcePath", () => {
 		).toBe("/Users/test/Desktop/capture.mp4");
 	});
 
-	it("extracts local paths from Recordly media-server URLs", () => {
+	it("extracts local paths from Outcut AI media-server URLs", () => {
 		expect(
 			resolveAutoCaptionSourcePath({
 				videoPath:

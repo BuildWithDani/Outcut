@@ -333,9 +333,9 @@ export function registerCloudShareHandlers() {
 				activeUploads.set(uploadId, controller);
 				const requestedPath = path.resolve(input.filePath);
 				const resolvedPath = await fs.realpath(requestedPath);
-				const isRecordlyExport =
+				const isOutcutExport =
 					isOwnedExportPath(requestedPath) || isOwnedExportPath(resolvedPath);
-				if (!isRecordlyExport && !isAllowedLocalReadPath(resolvedPath)) {
+				if (!isOutcutExport && !isAllowedLocalReadPath(resolvedPath)) {
 					throw new Error("This file is outside Outcut AI's approved media locations.");
 				}
 				const stat = await fs.stat(resolvedPath);

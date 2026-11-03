@@ -4,11 +4,7 @@ import { TextField, Label, Input } from "@heroui/react";
 import { AccountAvatar, getAccountProfile } from "@/components/ui/account-avatar";
 import { Button } from "@/components/ui/button";
 import { SettingsRow } from "@/components/video-editor/SettingsRow";
-import {
-	requestAccountEmailChange,
-	signOutRecordly,
-	updateAccountName,
-} from "@/lib/auth/recordlyAuth";
+import { requestAccountEmailChange, signOutOutcut, updateAccountName } from "@/lib/auth/outcutAuth";
 
 const providerNames: Record<string, string> = {
 	email: "Email magic link",
@@ -171,7 +167,7 @@ export function AccountSettings({ user }: { user: User | null }) {
 					variant="destructive-soft"
 					size="sm"
 					disabled={Boolean(busy)}
-					onClick={() => void run("signout", signOutRecordly)}
+					onClick={() => void run("signout", signOutOutcut)}
 				>
 					{busy === "signout" ? "Signing out…" : "Sign out"}
 				</Button>

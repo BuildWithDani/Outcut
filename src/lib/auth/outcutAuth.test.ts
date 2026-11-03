@@ -41,7 +41,7 @@ it("sends former demo credentials to Supabase even during development", async ()
 		data: { user: null },
 		error: new Error("Invalid login credentials"),
 	});
-	const { signInWithEmail } = await import("./recordlyAuth");
+	const { signInWithEmail } = await import("./outcutAuth");
 	await expect(signInWithEmail("test@email.com", "1234")).rejects.toThrow(
 		"Invalid login credentials",
 	);
@@ -56,21 +56,21 @@ for (const [description, session, error, expected] of [
 ] as const) {
 	it(`requires a Supabase session: ${description}`, async () => {
 		getSession.mockResolvedValue({ data: { session }, error });
-		const { hasRecordlySession } = await import("./recordlyAuth");
-		await expect(hasRecordlySession()).resolves.toBe(expected);
+		const { hasOutcutSession } = await import("./outcutAuth");
+		await expect(hasOutcutSession()).resolves.toBe(expected);
 	});
 }
 
 it("does not permit recording when Supabase is unconfigured", async () => {
 	vi.stubEnv("VITE_SUPABASE_URL", "");
-	const { hasRecordlySession } = await import("./recordlyAuth");
-	await expect(hasRecordlySession()).resolves.toBe(false);
+	const { hasOutcutSession } = await import("./outcutAuth");
+	await expect(hasOutcutSession()).resolves.toBe(false);
 	expect(getSession).not.toHaveBeenCalled();
 });
 
 it("signs out through Supabase", async () => {
-	const { signOutRecordly } = await import("./recordlyAuth");
-	await signOutRecordly();
+	const { signOutOutcut } = await import("./outcutAuth");
+	await signOutOutcut();
 	expect(signOut).toHaveBeenCalledOnce();
 });
 
@@ -83,7 +83,7 @@ it("offers only OAuth providers enabled in the configured Supabase project", asy
 			),
 	);
 	vi.stubGlobal("fetch", fetchSettings);
-	const { getEnabledSignInProviders } = await import("./recordlyAuth");
+	const { getEnabledSignInProviders } = await import("./outcutAuth");
 	await expect(getEnabledSignInProviders()).resolves.toEqual(["google"]);
 	expect(fetchSettings).toHaveBeenCalledWith(
 		"https://auth.example.test/auth/v1/settings",
@@ -96,7 +96,7 @@ it("reports an unavailable Auth settings endpoint instead of assuming providers 
 		"fetch",
 		vi.fn(async () => new Response("Bad Gateway", { status: 502 })),
 	);
-	const { getEnabledSignInProviders } = await import("./recordlyAuth");
+	const { getEnabledSignInProviders } = await import("./outcutAuth");
 	await expect(getEnabledSignInProviders()).rejects.toThrow("Sign-in is temporarily unavailable");
 });
 afterEach(() => {
@@ -105,7 +105,7 @@ afterEach(() => {
 });
 
 it("exchanges a callback once when live and pending delivery overlap", async () => {
-	const { completeAuthCallback } = await import("./recordlyAuth");
+	const { completeAuthCallback } = await import("./outcutAuth");
 	const url = "recordly://auth/callback?code=one-time-code";
 	await Promise.all([completeAuthCallback(url), completeAuthCallback(url)]);
 	await completeAuthCallback(url);
@@ -113,7 +113,7 @@ it("exchanges a callback once when live and pending delivery overlap", async () 
 });
 
 it("shows provider errors without attempting a code exchange", async () => {
-	const { completeAuthCallback } = await import("./recordlyAuth");
+	const { completeAuthCallback } = await import("./outcutAuth");
 	await expect(
 		completeAuthCallback(
 			"recordly://auth/callback?error=denied&error_description=Sign-in+cancelled",
@@ -125,7 +125,7 @@ it("shows provider errors without attempting a code exchange", async () => {
 it("requests Microsoft's email scope and opens its OAuth URL externally", async () => {
 	const openExternalUrl = vi.fn(async () => ({ success: true }));
 	vi.stubGlobal("window", { electronAPI: { openExternalUrl } });
-	const { signInWithSocial } = await import("./recordlyAuth");
+	const { signInWithSocial } = await import("./outcutAuth");
 	await signInWithSocial("azure");
 	expect(oauth).toHaveBeenCalledWith(
 		expect.objectContaining({
@@ -139,7 +139,7 @@ it("requests Microsoft's email scope and opens its OAuth URL externally", async 
 for (const dev of [true, false]) {
 	it(`requests an app-initiated email link with the ${dev ? "development" : "installed"} callback`, async () => {
 		vi.stubEnv("DEV", dev);
-		const { sendSignInLink } = await import("./recordlyAuth");
+		const { sendSignInLink } = await import("./outcutAuth");
 		await sendSignInLink("owner@example.test");
 		expect(emailOtp).toHaveBeenCalledExactlyOnceWith({
 			email: "owner@example.test",
@@ -154,7 +154,7 @@ for (const dev of [true, false]) {
 }
 
 it("does not accept dashboard implicit session tokens as a PKCE callback", async () => {
-	const { completeAuthCallback } = await import("./recordlyAuth");
+	const { completeAuthCallback } = await import("./outcutAuth");
 	await expect(
 		completeAuthCallback("recordly://auth/callback#access_token=test&refresh_token=test"),
 	).rejects.toThrow("Request a new sign-in link from Outcut AI");

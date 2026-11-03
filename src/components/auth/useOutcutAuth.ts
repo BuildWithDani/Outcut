@@ -1,26 +1,22 @@
 import type { User } from "@supabase/supabase-js";
 import { useEffect, useRef, useState } from "react";
-import {
-	completeAuthCallback,
-	recordlyAuth,
-	recordlyAuthConfigured,
-} from "@/lib/auth/recordlyAuth";
+import { completeAuthCallback, outcutAuth, outcutAuthConfigured } from "@/lib/auth/outcutAuth";
 
-export function useRecordlyAuth() {
+export function useOutcutAuth() {
 	const [user, setUser] = useState<User | null>(null);
 	const [accessToken, setAccessToken] = useState<string>();
-	const [loading, setLoading] = useState(recordlyAuthConfigured);
+	const [loading, setLoading] = useState(outcutAuthConfigured);
 	const [callbackError, setCallbackError] = useState<string>();
 	const callbackUrl = useRef<string | undefined>(undefined);
 
 	useEffect(() => {
-		if (!recordlyAuth) {
+		if (!outcutAuth) {
 			setLoading(false);
 			return;
 		}
 
 		let mounted = true;
-		void recordlyAuth.auth
+		void outcutAuth.auth
 			.getSession()
 			.then(({ data, error }) => {
 				if (error) throw error;
@@ -36,7 +32,7 @@ export function useRecordlyAuth() {
 					setLoading(false);
 				}
 			});
-		const { data: listener } = recordlyAuth.auth.onAuthStateChange((_event, session) => {
+		const { data: listener } = outcutAuth.auth.onAuthStateChange((_event, session) => {
 			if (mounted) {
 				setUser(session?.user ?? null);
 				setAccessToken(session?.access_token);
@@ -72,7 +68,7 @@ export function useRecordlyAuth() {
 		user: user?.is_anonymous ? null : user,
 		accessToken: user?.is_anonymous ? undefined : accessToken,
 		loading,
-		configured: recordlyAuthConfigured,
+		configured: outcutAuthConfigured,
 		callbackError,
 	};
 }

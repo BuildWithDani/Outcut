@@ -21,8 +21,8 @@ import { formatBinding, SHORTCUT_ACTIONS, SHORTCUT_LABELS } from "@/lib/shortcut
 import { formatShortcut } from "@/utils/platformUtils";
 import { toast } from "@/components/ui/toast";
 
-export const RECORDLY_ISSUES_URL = "https://github.com/BuildWithDani/Outcut/issues";
-const RECORDLY_DISCORD_URL = "https://discord.gg/sdv2FBVNgE";
+export const OUTCUT_ISSUES_URL = "https://github.com/BuildWithDani/Outcut/issues";
+const OUTCUT_DISCORD_URL = "https://discord.gg/sdv2FBVNgE";
 export const APP_HEADER_ACTION_BUTTON_CLASS =
 	"h-7 px-2 text-xs text-muted-foreground hover:bg-foreground/10 hover:text-foreground transition-all gap-1.5";
 export const APP_HEADER_ICON_BUTTON_CLASS =
@@ -62,7 +62,7 @@ export function DiscordLinkButton() {
 			size="sm"
 			onClick={() =>
 				void openExternalLink(
-					RECORDLY_DISCORD_URL,
+					OUTCUT_DISCORD_URL,
 					t("feedback.openFailed", "Failed to open link."),
 				)
 			}
@@ -111,8 +111,7 @@ export function KeyboardShortcutsDialog({
 			<DialogContent className="max-w-lg">
 				<DialogHeader>
 					<DialogTitle className="text-xl font-semibold text-foreground flex items-center gap-2">
-						<Keyboard className="h-5 w-5 text-accent" />{" "}
-						{t("keyboardShortcuts.title")}
+						<Keyboard className="h-5 w-5 text-accent" /> {t("keyboardShortcuts.title")}
 					</DialogTitle>
 					<DialogDescription className="text-muted-foreground">
 						{t(

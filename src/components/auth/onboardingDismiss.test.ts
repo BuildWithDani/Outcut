@@ -11,7 +11,7 @@ describe("dismissible onboarding", () => {
 			"utf8",
 		);
 		const dialog = readFileSync(
-			path.join(root, "src/components/auth/RecordlySignInDialog.tsx"),
+			path.join(root, "src/components/auth/OutcutSignInDialog.tsx"),
 			"utf8",
 		);
 		expect(controller).toContain("allowDismissWithoutAccount");
