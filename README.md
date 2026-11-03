@@ -3,10 +3,12 @@
 </p>
 
 <p align="center">
-  <strong>Outcut AI</strong> — free, open-source screen recording and video editing for creators who want polished captures without a cloud lock-in.
+  <strong>Outcut AI</strong><br />
+  Free, open-source screen recording and video editing — local-first, AGPL, maintained by BuildWithDani.
 </p>
 
 <p align="center">
+  <a href="https://github.com/BuildWithDani/Outcut/actions/workflows/quality.yml"><img src="https://github.com/BuildWithDani/Outcut/actions/workflows/quality.yml/badge.svg" alt="Code Quality" /></a>
   <a href="https://github.com/BuildWithDani/Outcut/blob/main/LICENSE.md"><img src="https://img.shields.io/badge/license-AGPL--3.0-1D8070?style=flat-square" alt="AGPL-3.0" /></a>
   <img src="https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-0D312B?style=flat-square" alt="macOS Windows Linux" />
   <a href="https://github.com/BuildWithDani/Outcut"><img src="https://img.shields.io/badge/maintainer-BuildWithDani-35BCA6?style=flat-square" alt="BuildWithDani" /></a>
@@ -14,30 +16,26 @@
 
 # Outcut AI
 
-Outcut AI is a desktop recorder and editor maintained by [BuildWithDani](https://github.com/BuildWithDani). Capture a display or window, jump straight into a timeline, polish cursor motion, frame the scene, annotate, and export locally — all without requiring an account for core use.
+Outcut AI is a desktop recorder and editor for creators who want polished captures without a cloud lock-in. Record a display or window, drop into a real timeline, refine cursor motion and framing, annotate, and export locally.
 
-The product is independently branded and maintained. Its eligible recording and editing engine is derived from [Recordly](https://github.com/webadderallorg/Recordly) (AGPL-3.0), which itself began from [OpenScreen](https://github.com/siddharthvaddem/openscreen) (MIT). See [NOTICE.md](./NOTICE.md) and [UPSTREAM.md](./UPSTREAM.md). BuildWithDani does **not** claim authorship of inherited Recordly or OpenScreen code.
+Maintained by [BuildWithDani](https://github.com/BuildWithDani). Independently branded. The eligible recording and editing foundation is derived from [Recordly](https://github.com/webadderallorg/Recordly) (AGPL-3.0), which began from [OpenScreen](https://github.com/siddharthvaddem/openscreen) (MIT). See [NOTICE.md](./NOTICE.md) and [UPSTREAM.md](./UPSTREAM.md). BuildWithDani does **not** claim authorship of inherited Recordly or OpenScreen code.
 
 > **AI Director 2.0** is on the roadmap as a bring-your-own-agent layer for guided editing. It is **not implemented** in this repository yet. Manual recording and editing are the shipped foundation.
 
-## Overview
+## Why Outcut
 
-Outcut AI keeps the professional desktop workflow in one place:
+- **Local-first** — core record, edit, save, and export work offline
+- **Honest open source** — AGPL-3.0 with clear upstream attribution
+- **Creator workflow** — recorder and editor in one desktop app
+- **Room to grow** — AI Director 2.0 planned on top of this foundation; Outcut Cloud is a future optional paid service, not required for desktop use
 
-1. Record screen (and optional microphone / system audio / webcam).
-2. Edit on a real timeline with zooms, speed regions, crops, and annotations.
-3. Style the frame with backgrounds, padding, shadows, and cursor effects.
-4. Export MP4 or GIF locally.
-
-Optional cloud sign-in UI remains in the tree for a future Outcut Cloud and for compatibility with upstream auth plumbing. Local save, open, edit, and export do not require signing in.
-
-## Capabilities (shipped)
+## Shipped capabilities
 
 ### Recording
 
 - Full display or single-window capture
 - Microphone and system audio where the platform supports it
-- Native capture helpers on macOS (ScreenCaptureKit) and Windows (WGC); Linux via Electron capture APIs
+- Native helpers on macOS (ScreenCaptureKit) and Windows (WGC); Linux via Electron capture APIs
 - Direct handoff into the editor after a take
 
 ### Editing
@@ -55,12 +53,12 @@ Optional cloud sign-in UI remains in the tree for a future Outcut Cloud and for 
 
 - MP4 and GIF export
 - Settings and keyboard shortcuts
-- Community extension hooks (see [EXTENSIONS.md](./EXTENSIONS.md))
+- Community extension hooks — see [EXTENSIONS.md](./EXTENSIONS.md)
 
 ### Roadmap (not shipped)
 
-- **AI Director 2.0** — agent-assisted editing on top of the manual editor, designed for bring-your-own-agent workflows
-- Independently hosted Outcut Cloud (optional; not required for desktop use)
+- **AI Director 2.0** — agent-assisted editing designed for bring-your-own-agent workflows
+- Independently hosted **Outcut Cloud** (optional; not required for desktop use)
 
 ## Platforms
 
@@ -87,14 +85,17 @@ Requirements:
 ```bash
 git clone https://github.com/BuildWithDani/Outcut.git
 cd Outcut
-npm install --legacy-peer-deps
+npm install
 npm run dev
 ```
+
+Open the repo in Cursor/VS Code via [`Outcut.code-workspace`](./Outcut.code-workspace) so the workspace title shows **Outcut AI**.
 
 Useful commands:
 
 ```bash
 npm run typecheck
+npm run lint
 npm test
 npm run build:win    # Windows
 npm run build:mac
@@ -114,8 +115,8 @@ Canonical logo: [`assets/branding/outcut-logo.svg`](./assets/branding/outcut-log
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-- Issues and feature requests: https://github.com/BuildWithDani/Outcut/issues
-- Security reports: [SECURITY.md](./SECURITY.md)
+- Issues: https://github.com/BuildWithDani/Outcut/issues
+- Security: [SECURITY.md](./SECURITY.md)
 
 ## License and attribution
 
@@ -127,6 +128,7 @@ Outcut AI is licensed under the **GNU Affero General Public License v3.0**. See 
 | [UPSTREAM.md](./UPSTREAM.md) | Recordly / OpenScreen provenance and compatibility contracts |
 | [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md) | Third-party components |
 | [TRADEMARKS.md](./TRADEMARKS.md) | Outcut, Recordly, and OpenScreen marks |
+| [docs/EXTERNAL_SERVICES.md](./docs/EXTERNAL_SERVICES.md) | Domains, env vars, and optional integrations |
 
 In-app **Credits** (home sidebar) repeats Recordly and OpenScreen attribution for end users.
 

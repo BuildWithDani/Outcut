@@ -60,4 +60,10 @@ The default branch may use a fresh import commit that preserves this source tree
 
 ## External services
 
-See [docs/EXTERNAL_SERVICES.md](./docs/EXTERNAL_SERVICES.md) for the BUILD 001.4 service inventory.
+See [docs/EXTERNAL_SERVICES.md](./docs/EXTERNAL_SERVICES.md) for the current service inventory.
+
+## Branding assets
+
+Canonical product mark: `assets/branding/outcut-logo.svg`  
+Generated icons: `public/app-icons/outcut-*.png`, `icons/icons/**` via `npm run icons:outcut`  
+Obsolete upstream icon sources under `branding/source-assets/` were removed after confirming the build uses the Outcut icon pipeline only.

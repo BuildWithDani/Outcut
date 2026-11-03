@@ -85,7 +85,7 @@ Paths are relative to the extension root. The marketplace displays screenshots i
 | `author` | `string` | No | Author or organisation |
 | `homepage` | `string` | No | HTTPS homepage or repository URL |
 | `license` | `string` | No | SPDX license identifier |
-| `engine` | `string` | No | Minimum supported Recordly version |
+| `engine` | `string` | No | Minimum supported Outcut AI / Recordly-compatible engine version |
 | `icon` | `string` | No | Relative path to a PNG icon |
 | `screenshots` | `string[]` | No | Relative paths to preview images shown in the marketplace |
 | `main` | `string` | Yes | Relative entry point JS file |

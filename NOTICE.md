@@ -29,7 +29,8 @@ BuildWithDani does **not** claim ownership of Recordly-derived or OpenScreen-der
 Paths authored or substantially rewritten by BuildWithDani for Outcut AI (non-exhaustive; does not claim ownership of Recordly/OpenScreen program logic):
 
 - `assets/branding/outcut-logo.svg` and generated Outcut icons under `assets/branding/generated/`, `public/app-icons/outcut-*.png`, and regenerated `icons/icons/**`
-- `scripts/generate-outcut-icons.mjs`
+- `scripts/generate-outcut-icons.mjs` (canonical icon pipeline; obsolete `branding/source-assets/` removed)
+- `Outcut.code-workspace` (development workspace identity)
 - `src/styles/outcut-brand.css` and related theme wiring
 - `src/components/credits/CreditsDialog.tsx`
 - Product documentation: `README.md`, `CONTRIBUTING.md`, `SECURITY.md`, `NOTICE.md`, `UPSTREAM.md`, `TRADEMARKS.md`
