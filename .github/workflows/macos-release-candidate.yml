@@ -40,10 +40,13 @@ jobs:
         run: |
           set -euo pipefail
 
-          if [[ "${GITHUB_REPOSITORY,,}" != "webadderallorg/recordly" ]]; then
-            echo "This workflow may run only in webadderallorg/Recordly."
-            exit 1
-          fi
+          case "${GITHUB_REPOSITORY,,}" in
+            buildwithdani/outcut) ;;
+            *)
+              echo "This workflow may run only in BuildWithDani/Outcut."
+              exit 1
+              ;;
+          esac
 
           if [[ "$GITHUB_REF" != "refs/heads/main" ]]; then
             echo "This workflow must itself be dispatched from main."

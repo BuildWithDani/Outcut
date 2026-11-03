@@ -61,9 +61,6 @@ async function main() {
 	for (const size of APP_ICON_SIZES) {
 		const buffer = size === 1024 ? master : await rasterize(svg, size);
 		await writeFile(path.join(appIconsDir, `outcut-${size}.png`), buffer);
-		// Preserve legacy asset filenames used by existing path helpers.
-		await writeFile(path.join(appIconsDir, `recordly-${size}.png`), buffer);
-		await writeFile(path.join(appIconsDir, `recordlymac-${size}.png`), buffer);
 		await writeFile(path.join(generatedDir, `outcut-${size}.png`), buffer);
 	}
 

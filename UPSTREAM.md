@@ -13,10 +13,10 @@
 - Author: webadderall
 - Repository: https://github.com/webadderallorg/Recordly
 - License: AGPL-3.0 (with additional trademark/attribution terms in `LICENSE.md`)
-- Verified source commit for this Outcut rebrand branch: `109ca3a13c362e969d9add25d1f93406c36dba2a`  
+- Verified source commit for the Outcut rebrand base: `109ca3a13c362e969d9add25d1f93406c36dba2a`  
   (`Merge pull request #1147 from webadderallorg/codex/mac-audio-gap-timing`)
 
-Outcut AI preserves Recordly’s eligible recorder, editor, timeline, webcam, cursor, export, settings, extensions, and project workflows. This milestone changes branding, attribution, documentation, and packaging identity only.
+Outcut AI preserves Recordly’s eligible recorder, editor, timeline, webcam, cursor, export, settings, extensions, and project workflows. Subsequent Outcut commits add branding, documentation, packaging identity, dismissible onboarding, teal theme tokens, and repository cleanup — not a second editor.
 
 ## Earlier upstream: OpenScreen
 
@@ -27,27 +27,29 @@ Outcut AI preserves Recordly’s eligible recorder, editor, timeline, webcam, cu
 
 Recordly originally started as a fork of OpenScreen. OpenScreen attribution and MIT terms remain in `LICENSE.md`.
 
-## Compatibility notes intentionally preserved
+## Compatibility contracts (intentionally preserved)
 
 | Area | Status |
 | --- | --- |
 | `.recordly` project files | Preserved for open/save compatibility |
 | `recordly.*` localStorage / settings keys | Preserved |
-| Auth deep-link scheme `recordly://` / `recordly-dev://` | Preserved so existing auth redirect configuration continues to work; `outcut://` is also registered |
-| MIME / UTI `dev.recordly.app.project` | Preserved for document type continuity |
-| Internal code identifiers (e.g. `RecordlySignInDialog`) | Preserved where renaming would be churn without user benefit |
+| Auth deep-link schemes `recordly://` / `recordly-dev://` | Preserved for existing redirect configuration; `outcut://` is also registered |
+| MIME / UTI `dev.recordly.app.project` | Preserved for document-type continuity |
+| Native helper binary names (`recordly-*-helper`, `recordly-gpu-export`, …) | Preserved where packaging and spawn paths depend on them |
+| Internal TypeScript symbols (e.g. `RecordlySignInDialog`) | Preserved where rename churn has no user benefit |
+| `services/recordly-share` | Retained as optional upstream-compatible share worker; not an official Outcut Cloud |
 
-## Cloud / authentication (BUILD 001.1)
+## Cloud / authentication
 
 Local recording, editing, save/open, and export do **not** require an Outcut account.
 
-Optional sign-in UI remains in the codebase for future Outcut Cloud and for compatibility with upstream Recordly auth plumbing (Supabase client, magic-link templates, share worker). Until Outcut operates its own authorized cloud endpoints:
+Optional sign-in UI remains for future Outcut Cloud and Recordly auth plumbing (Supabase client, magic-link templates, share worker). Until Outcut operates authorized cloud endpoints:
 
 - Do not present Recordly-owned cloud URLs as official Outcut services
 - Treat cloud account features as optional / future
 - Welcome onboarding is dismissible via **X**, **Escape**, or **Continue without an account**
 
-## Remotes used during rebrand
+## Remotes
 
-- Upstream history retained from `https://github.com/webadderallorg/Recordly`
+- History retained from `https://github.com/webadderallorg/Recordly`
 - Destination repository: `https://github.com/BuildWithDani/Outcut`

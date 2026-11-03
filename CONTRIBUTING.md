@@ -1,70 +1,90 @@
-# Contribution Guidelines
+# Contributing to Outcut AI
 
-Thank you for considering contributing to **Outcut AI**. By contributing, you help make this project better for everyone.
+Thank you for helping improve Outcut AI. This project is maintained by [BuildWithDani](https://github.com/BuildWithDani) and includes substantial code derived from Recordly and OpenScreen. Please keep attribution accurate and product branding consistent.
 
-Areas where help is especially valuable:
+## Report an issue
 
-- Export optimisations
-- Native screen recording for Linux
-- Wallpaper submissions
-- Extensions (device frames, click effects, render hooks — see [EXTENSIONS.md](./EXTENSIONS.md))
-- Documentation and localization polish
-- Future AI Director 2.0 work (tracked separately; not part of the rebrand milestone)
+Open a bug report at https://github.com/BuildWithDani/Outcut/issues and include:
 
-## How to Contribute
+- Outcut AI version or git commit SHA
+- Operating system and version
+- Steps to reproduce
+- Expected vs actual behavior
+- Relevant logs (without secrets, API keys, or private media paths)
 
-1. **Fork the Repository**
-   - Fork https://github.com/BuildWithDani/Outcut
+Security-sensitive findings belong in [SECURITY.md](./SECURITY.md), not public issues.
 
-2. **Clone Your Fork**
-   ```bash
-   git clone https://github.com/your-username/Outcut.git
-   ```
+## Request a feature
 
-3. **Create a New Branch**
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
+Use the feature-request issue template. Prefer concrete workflows over slogans. Features that depend on **AI Director 2.0** should be labeled as roadmap items — that subsystem is not shipped yet.
 
-4. **Make Changes**
-   - Prefer focused diffs. Do not redesign existing Recordly-derived UI unless the issue asks for it.
-   - Preserve `.recordly` project compatibility and existing storage keys unless a migration is explicitly planned.
+## Local development
 
-5. **Test Your Changes**
-   - Run lint/typecheck/tests relevant to your change.
-   - On Windows, smoke-test recorder and editor when touching capture or packaging.
+```bash
+git clone https://github.com/BuildWithDani/Outcut.git
+cd Outcut
+npm install --legacy-peer-deps
+npm run dev
+```
 
-6. **Commit Your Changes**
-   ```bash
-   git add .
-   git commit -m "Add a brief description of your changes"
-   ```
+Common checks:
 
-7. **Push Your Changes**
-   ```bash
-   git push origin feature/your-feature-name
-   ```
+```bash
+npm run typecheck
+npm run lint
+npm test
+npm run test:ui   # Playwright UI suite when changing onboarding/editor chrome
+```
 
-8. **Open a Pull Request**
-   - Open a PR against https://github.com/BuildWithDani/Outcut
-   - Describe the problem, the fix, and how you tested it
+Platform packaging:
 
-## Reporting Issues
+```bash
+npm run build:win
+npm run build:mac
+npm run build:linux
+```
 
-Open an issue at https://github.com/BuildWithDani/Outcut/issues with reproduction steps, OS, and Outcut AI version/commit.
+Native helpers may require Rust and platform SDKs. Prefer reproducing capture/export bugs on the OS you changed.
 
-Security reports: see [SECURITY.md](./SECURITY.md).
+## Code conventions
+
+- Match existing TypeScript / React / Electron patterns in the area you touch.
+- Prefer focused diffs. Do not redesign Recordly-derived editor layout unless an issue asks for it.
+- Keep user-facing product name **Outcut AI** and the teal brand tokens in `src/styles/outcut-brand.css`.
+- Do not modify `assets/branding/outcut-logo.svg` geometry, gradient, or colors.
+- Preserve compatibility contracts listed in [UPSTREAM.md](./UPSTREAM.md) (`.recordly` projects, `recordly.*` settings keys, auth schemes) unless you ship a tested migration.
+- Do not connect contributors’ builds to Recordly-owned production cloud endpoints as if they were Outcut Cloud.
+
+## Tests and pull requests
+
+1. Fork https://github.com/BuildWithDani/Outcut (or push a branch if you have write access).
+2. Create a branch named for the change (`fix/…`, `feat/…`, `docs/…`).
+3. Run typecheck, lint, and the tests relevant to your change.
+4. Open a pull request against the default branch (`main`).
+5. Describe the problem, the approach, and how you validated it.
+6. Link related issues.
+
+Reviewers look for correctness, compatibility, attribution, and scope control. Large unrelated refactors slow review and may be asked to split.
+
+## Contributor licensing
+
+By contributing, you agree that your contributions are licensed under the [GNU Affero General Public License v3.0](./LICENSE.md), and that you have the right to submit them under that license.
+
+## AI-assisted contributions
+
+AI tools may be used to draft or edit patches. Contributors remain responsible for:
+
+- Verifying behavior on a real build where feasible
+- Not inventing features, credentials, or security guarantees
+- Preserving licenses, notices, and upstream attribution
+- Avoiding blind search-and-replace across product identity or persisted formats
+
+Do not add fabricated co-author trailers or misattribute upstream work.
+
+## Release workflow
+
+Maintainers cut releases from GitHub Releases and the workflows under `.github/workflows/`. Contributors should not publish installers from forks under the Outcut AI name without coordination. See [RELEASING.md](./RELEASING.md) when present and current.
 
 ## Upstream relationship
 
-Outcut AI is derived from [Recordly](https://github.com/webadderallorg/Recordly) (AGPL-3.0), which started from [OpenScreen](https://github.com/siddharthvaddem/openscreen) (MIT). See [UPSTREAM.md](./UPSTREAM.md) and [NOTICE.md](./NOTICE.md).
-
-## Style Guide
-
-- Write clear, concise commit messages.
-- Comment complex logic where necessary.
-- Keep branding as **Outcut AI**; do not reintroduce Recordly logos as product branding.
-
-## License
-
-By contributing, you agree that your contributions are licensed under the [GNU Affero General Public License v3.0](./LICENSE.md).
+Outcut AI is derived from [Recordly](https://github.com/webadderallorg/Recordly) (AGPL-3.0), which started from [OpenScreen](https://github.com/siddharthvaddem/openscreen) (MIT). Keep credits and legal files intact. See [NOTICE.md](./NOTICE.md) and [UPSTREAM.md](./UPSTREAM.md).
