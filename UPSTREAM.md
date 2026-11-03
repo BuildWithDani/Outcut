@@ -53,3 +53,11 @@ Optional sign-in UI remains for future Outcut Cloud and Recordly auth plumbing (
 
 - History retained from `https://github.com/webadderallorg/Recordly`
 - Destination repository: `https://github.com/BuildWithDani/Outcut`
+
+## Active Git history note
+
+The default branch may use a fresh import commit that preserves this source tree without replaying upstream commit parents. Full Recordly-derived ancestry remains on archive refs (`archive/outcut-with-upstream-history`). Legal attribution in this file and `NOTICE.md` is unaffected.
+
+## External services
+
+See [docs/EXTERNAL_SERVICES.md](./docs/EXTERNAL_SERVICES.md) for the BUILD 001.4 service inventory.
