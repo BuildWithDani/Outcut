@@ -492,10 +492,10 @@ export function registerProjectHandlers() {
 				const defaultName = `${safeName}.${PROJECT_FILE_EXTENSION}`;
 
 				const result = await dialog.showSaveDialog({
-					title: "Save Recordly Project",
+					title: "Save Outcut AI Project",
 					defaultPath: path.join(projectsDir, defaultName),
 					filters: [
-						{ name: "Recordly Project", extensions: [PROJECT_FILE_EXTENSION] },
+						{ name: "Outcut AI Project (.recordly)", extensions: [PROJECT_FILE_EXTENSION] },
 						{ name: "JSON", extensions: ["json"] },
 					],
 					properties: ["createDirectory", "showOverwriteConfirmation"],
@@ -645,11 +645,11 @@ export function registerProjectHandlers() {
 		try {
 			const projectsDir = await getProjectsDir();
 			const result = await dialog.showOpenDialog({
-				title: "Open Recordly Project",
+				title: "Open Outcut AI Project",
 				defaultPath: projectsDir,
 				filters: [
 					{
-						name: "Recordly Project",
+						name: "Outcut AI Project (.recordly)",
 						extensions: [PROJECT_FILE_EXTENSION, ...LEGACY_PROJECT_FILE_EXTENSIONS],
 					},
 					{ name: "JSON", extensions: ["json"] },
