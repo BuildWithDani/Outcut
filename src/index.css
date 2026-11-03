@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@heroui/styles";
+@import "./styles/outcut-brand.css";
 @plugin "tailwindcss-animate";
 @custom-variant dark (&:where(.dark, .dark *));
 @source "../index.html";
@@ -52,10 +53,10 @@
 	:root {
 		--app-font-sans:
 			"DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-		--brand-accent: var(--accent);
-		--brand-accent-rgb: 0, 111, 238;
-		--primary: var(--accent);
-		--primary-foreground: var(--accent-foreground);
+		--brand-accent: var(--outcut-accent);
+		--brand-accent-rgb: var(--outcut-accent-rgb);
+		--primary: var(--outcut-accent);
+		--primary-foreground: var(--outcut-accent-foreground);
 		--muted-foreground: var(--muted);
 		--destructive: var(--danger);
 		--input: var(--field-border);

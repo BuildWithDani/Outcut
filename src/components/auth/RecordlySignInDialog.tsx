@@ -38,6 +38,8 @@ export type SignInReason = "account" | "share";
 type Props = {
 	variant?: "compact" | "wide";
 	onboarding?: boolean;
+	/** When true, Welcome can be closed without signing in (local desktop use). */
+	allowDismissWithoutAccount?: boolean;
 	startWithPermissions?: boolean;
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
@@ -46,6 +48,7 @@ type Props = {
 	configured: boolean;
 	callbackError?: string;
 	onAuthenticated: () => void;
+	onContinueWithoutAccount?: () => void;
 };
 
 function friendlyAuthError(
@@ -68,6 +71,7 @@ function friendlyAuthError(
 export function RecordlySignInDialog({
 	variant = "compact",
 	onboarding = false,
+	allowDismissWithoutAccount = false,
 	startWithPermissions = false,
 	open,
 	onOpenChange,
@@ -75,12 +79,13 @@ export function RecordlySignInDialog({
 	configured,
 	callbackError,
 	onAuthenticated,
+	onContinueWithoutAccount,
 }: Props) {
 	const { t } = useI18n();
 	const awaitingSignIn = useRef(false);
 	const wide = onboarding || variant === "wide";
 	const [showPermissions, setShowPermissions] = useState(false);
-	const requiresSignIn = onboarding && !user;
+	const requiresSignIn = onboarding && !user && !allowDismissWithoutAccount;
 	const permissions = onboarding && Boolean(user) && showPermissions;
 	const [email, setEmail] = useState("");
 	const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
@@ -245,7 +250,9 @@ export function RecordlySignInDialog({
 								description={
 									user
 										? user.email || "You’re signed in and ready to continue."
-										: "Sign in to Outcut AI to start recording, save your work and share it."
+										: allowDismissWithoutAccount
+											? "Optional: create an account later for cloud features. Local recording, editing, and export work without signing in."
+											: "Sign in to Outcut AI to start recording, save your work and share it."
 								}
 							/>
 						) : (
@@ -450,6 +457,22 @@ export function RecordlySignInDialog({
 					</div>
 				</OnboardingFooter>
 			)}
+			{onboarding && !user && allowDismissWithoutAccount && (
+				<OnboardingFooter>
+					<div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-between">
+						<Button
+							variant="secondary"
+							isDisabled={disabled}
+							onPress={() => onContinueWithoutAccount?.()}
+						>
+							Continue without an account
+						</Button>
+						<span className="self-center text-xs text-muted">
+							Outcut Cloud is planned; local tools are free to use now.
+						</span>
+					</div>
+				</OnboardingFooter>
+			)}
 		</motion.div>
 	);
 	return (
@@ -537,7 +560,9 @@ export function RecordlySignInDialog({
 						)}
 						{!requiresSignIn && (
 							<Modal.CloseTrigger
-								aria-label={t("common.actions.close")}
+								aria-label={
+									onboarding ? "Close welcome dialog" : t("common.actions.close")
+								}
 								className="z-20"
 							/>
 						)}

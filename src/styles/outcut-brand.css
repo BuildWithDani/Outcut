@@ -1,0 +1,51 @@
+/*
+ * Outcut AI brand tokens.
+ * Logo gradient source of truth: assets/branding/outcut-logo.svg
+ *   top #58D3BC → bottom #1D8070
+ */
+:root {
+	--outcut-logo-top: #58d3bc;
+	--outcut-logo-bottom: #1d8070;
+	--outcut-accent: #35bca6;
+	--outcut-accent-hover: #58d3bc;
+	--outcut-accent-pressed: #1d8070;
+	--outcut-accent-subtle: #0d312b;
+	--outcut-accent-foreground: #ffffff;
+	--outcut-accent-rgb: 53, 188, 166;
+
+	/* Override HeroUI shared accent (declared on :root in @heroui/styles). */
+	--accent: var(--outcut-accent);
+	--accent-foreground: var(--outcut-accent-foreground);
+	--brand-accent: var(--outcut-accent);
+	--brand-accent-rgb: var(--outcut-accent-rgb);
+	--primary: var(--outcut-accent);
+	--primary-foreground: var(--outcut-accent-foreground);
+	--focus: var(--outcut-accent);
+}
+
+:root,
+.light,
+.default,
+[data-theme="light"],
+[data-theme="default"],
+.dark,
+[data-theme="dark"] {
+	--accent: var(--outcut-accent);
+	--accent-foreground: var(--outcut-accent-foreground);
+	--accent-hover: var(--outcut-accent-hover);
+	--focus: var(--outcut-accent);
+}
+
+.dark,
+[data-theme="dark"] {
+	/* Soft surfaces lean toward the deep teal plate on dark UI. */
+	--accent-soft: color-mix(in oklab, var(--outcut-accent) 22%, var(--outcut-accent-subtle) 18%);
+	--accent-soft-foreground: color-mix(in oklab, var(--outcut-accent) 75%, var(--foreground) 25%);
+	--accent-soft-hover: color-mix(in oklab, var(--outcut-accent) 28%, transparent);
+}
+
+/* Pressed / active primary controls */
+.button[data-variant="primary"]:active:not([data-disabled="true"]),
+.button[data-variant="primary"][data-pressed="true"]:not([data-disabled="true"]) {
+	background-color: var(--outcut-accent-pressed);
+}

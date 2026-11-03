@@ -98,7 +98,8 @@ export function AnnotationSettingsPanel({
 		"#FF5722", // Deep Orange
 		"#8BC34A", // Light Green
 		"#FFC107", // Amber
-		"#2563EB", // Brand Blue
+		"#35BCA6", // Outcut teal
+		"#2563EB", // Blue
 		"#000000", // Black
 		"#607D8B", // Blue Grey
 		"#795548", // Brown

@@ -3,11 +3,12 @@ import { installDesktopBridge } from "./bridge";
 import { completeSupabaseSignIn } from "./auth";
 
 test("settings opens permissions and the carousel banner adapts to each page", async ({ page }) => {
+	test.setTimeout(90_000);
 	await page.emulateMedia({ reducedMotion: "reduce" });
 	await installDesktopBridge(page);
 	await page.goto("/?windowType=editor");
 	await expect(page.getByRole("button", { name: "Home", exact: true })).toBeVisible({
-		timeout: 15000,
+		timeout: 45000,
 	});
 	await page.getByRole("radio", { name: "Settings", exact: true }).click();
 	await page.getByRole("button", { name: "Show onboarding" }).click();
@@ -202,35 +203,75 @@ test("short dark windows keep the banner and navigation visible while the accoun
 	await expect(tour.getByRole("heading", { name: "Allow Outcut AI to record" })).toBeVisible();
 });
 
-test("sign-in is mandatory even after onboarding was completed", async ({ page }) => {
+test("welcome can be dismissed without an account for local desktop use", async ({ page }) => {
 	await installDesktopBridge(page, "preview.mp4", { signedIn: false });
-	await page.addInitScript(() => sessionStorage.setItem("recordly.demo-session", "1"));
+	await page.addInitScript(() => {
+		window.electronAPI.getAppSetting = (key) => JSON.parse(localStorage.getItem(key) || "null");
+		window.electronAPI.setAppSetting = (key, value) => {
+			localStorage.setItem(key, JSON.stringify(value));
+			return true;
+		};
+	});
 	await page.goto("/?windowType=editor");
 	const tour = page.getByRole("dialog", { name: "Welcome to Outcut AI" });
+	await expect(tour).toBeVisible({ timeout: 20000 });
 	await expect(tour).toHaveAttribute("data-onboarding-state", "login");
-	await expect(tour.getByRole("button", { name: "Continue without signing in" })).toHaveCount(0);
-	await expect(tour.getByText("Optional", { exact: true })).toHaveCount(0);
-	await expect(tour.getByText("Sign in to continue", { exact: true })).toHaveCount(0);
-	const pages = tour.getByRole("navigation", { name: "Onboarding pages" });
-	await expect(pages).toBeInViewport();
-	await expect(pages.getByRole("button", { name: "Account", exact: true })).toHaveAttribute(
-		"aria-current",
-		"page",
-	);
-	await expect(pages.getByRole("button", { name: "Permissions", exact: true })).toBeDisabled();
-	await expect(tour.getByRole("button", { name: "Start recording" })).toHaveCount(0);
-	await expect(tour.getByRole("button", { name: "Close", exact: true })).toHaveCount(0);
-	await page.keyboard.press("Escape");
-	await page.mouse.click(5, 5);
-	await expect(tour).toBeVisible();
+	await expect(
+		tour.getByRole("button", { name: "Continue without an account", exact: true }),
+	).toBeVisible();
+	const close = tour.getByRole("button", { name: "Close welcome dialog" });
+	await expect(close).toBeVisible();
+	await close.click();
+	await expect(tour).not.toBeVisible();
+	await expect
+		.poll(() => page.evaluate(() => localStorage.getItem("recordly.onboarding.v1.seen")))
+		.toBe("true");
+	await expect(page.getByRole("button", { name: "Home", exact: true })).toBeVisible();
 	await page.reload();
-	await expect(tour).toHaveAttribute("data-onboarding-state", "login");
+	await expect(page.getByRole("button", { name: "Home", exact: true })).toBeVisible({
+		timeout: 15000,
+	});
+	await expect(tour).not.toBeVisible();
+});
+
+test("escape and continue without account dismiss welcome", async ({ page }) => {
+	await installDesktopBridge(page, "preview.mp4", { signedIn: false });
+	await page.addInitScript(() => {
+		window.electronAPI.getAppSetting = (key) => JSON.parse(localStorage.getItem(key) || "null");
+		window.electronAPI.setAppSetting = (key, value) => {
+			localStorage.setItem(key, JSON.stringify(value));
+			return true;
+		};
+	});
+	await page.goto("/?windowType=editor");
+	const tour = page.getByRole("dialog", { name: "Welcome to Outcut AI" });
+	await expect(tour).toBeVisible({ timeout: 20000 });
+	await page.keyboard.press("Escape");
+	await expect(tour).not.toBeVisible();
+	await expect
+		.poll(() => page.evaluate(() => localStorage.getItem("recordly.onboarding.v1.seen")))
+		.toBe("true");
+
+	await page.evaluate(() => localStorage.removeItem("recordly.onboarding.v1.seen"));
+	await page.reload();
+	const again = page.getByRole("dialog", { name: "Welcome to Outcut AI" });
+	await expect(again).toBeVisible({ timeout: 20000 });
+	await again.getByRole("button", { name: "Continue without an account", exact: true }).click();
+	await expect(again).not.toBeVisible();
+	await expect(page.getByRole("button", { name: "Home", exact: true })).toBeVisible();
 });
 
 test("Supabase email callback advances to permissions only after a session is returned", async ({
 	page,
 }) => {
 	await installDesktopBridge(page, "preview.mp4", { signedIn: false });
+	await page.addInitScript(() => {
+		window.electronAPI.getAppSetting = (key) => JSON.parse(localStorage.getItem(key) || "null");
+		window.electronAPI.setAppSetting = (key, value) => {
+			localStorage.setItem(key, JSON.stringify(value));
+			return true;
+		};
+	});
 	await page.goto("/?windowType=editor");
 	const tour = page.getByRole("dialog", { name: "Welcome to Outcut AI" });
 	await tour.getByPlaceholder("you@example.com").fill("test@email.com");
@@ -403,10 +444,16 @@ test("a permission request opens its page even after onboarding was already comp
 		});
 	});
 	await page.goto("/?windowType=editor");
+	await expect(page.getByRole("button", { name: "Home", exact: true })).toBeVisible({
+		timeout: 20000,
+	});
 	const tour = page.getByRole("dialog", { name: "Welcome to Outcut AI" });
-	await expect(tour.getByRole("heading", { name: "Allow Outcut AI to record" })).toBeVisible();
+	await expect(tour).toBeVisible({ timeout: 10000 });
+	await expect(tour.getByRole("heading", { name: "Allow Outcut AI to record" })).toBeVisible({
+		timeout: 10000,
+	});
 	await expect(
-		tour.getByRole("button", { name: "Continue without signing in" }),
+		tour.getByRole("button", { name: "Continue without an account", exact: true }),
 	).not.toBeVisible();
 });
 

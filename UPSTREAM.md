@@ -37,6 +37,16 @@ Recordly originally started as a fork of OpenScreen. OpenScreen attribution and 
 | MIME / UTI `dev.recordly.app.project` | Preserved for document type continuity |
 | Internal code identifiers (e.g. `RecordlySignInDialog`) | Preserved where renaming would be churn without user benefit |
 
+## Cloud / authentication (BUILD 001.1)
+
+Local recording, editing, save/open, and export do **not** require an Outcut account.
+
+Optional sign-in UI remains in the codebase for future Outcut Cloud and for compatibility with upstream Recordly auth plumbing (Supabase client, magic-link templates, share worker). Until Outcut operates its own authorized cloud endpoints:
+
+- Do not present Recordly-owned cloud URLs as official Outcut services
+- Treat cloud account features as optional / future
+- Welcome onboarding is dismissible via **X**, **Escape**, or **Continue without an account**
+
 ## Remotes used during rebrand
 
 - Upstream history retained from `https://github.com/webadderallorg/Recordly`

@@ -6,7 +6,8 @@ export async function installDesktopBridge(
 	auth = { signedIn: true },
 ) {
 	await installSupabaseAuth(page, auth);
-	await page.addInitScript((videoFixture) => {
+	await page.addInitScript(
+		([videoFixture, signedIn]) => {
 		const success = async () => ({ success: true });
 		const subscribe = () => () => undefined;
 		const source = {
@@ -17,8 +18,10 @@ export async function installDesktopBridge(
 		};
 		Object.assign(window, {
 			electronAPI: {
+				// Signed-in fixtures treat onboarding as already completed.
+				// Signed-out fixtures leave it unseen so Welcome can appear once.
 				getAppSetting: (key: string) =>
-					key === "recordly.onboarding.v1.seen" ? true : null,
+					key === "recordly.onboarding.v1.seen" ? signedIn : null,
 				finishRecordingStartup: async () => undefined,
 				showProjectDashboard: async () => {
 					document.documentElement.dataset.dashboardOpened = "true";
@@ -179,7 +182,9 @@ export async function installDesktopBridge(
 				...window.electronAPI,
 			},
 		});
-	}, videoFixture);
+	},
+		[videoFixture, Boolean(auth.signedIn)] as const,
+	);
 }
 
 /** Overrides can run before or after bridge defaults; Playwright does not order init scripts. */

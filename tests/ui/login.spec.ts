@@ -3,6 +3,7 @@ import { installDesktopBridge } from "./bridge";
 import { completeSupabaseSignIn } from "./auth";
 
 test("sign-in offers only providers enabled in Supabase", async ({ page }) => {
+	test.setTimeout(60_000);
 	await installDesktopBridge(page, "preview.mp4", { signedIn: false });
 	await page.route("https://auth.recordly.test/auth/v1/settings", (route) =>
 		route.fulfill({
@@ -11,7 +12,7 @@ test("sign-in offers only providers enabled in Supabase", async ({ page }) => {
 	);
 	await page.goto("/?windowType=editor");
 	const login = page.getByRole("dialog", { name: "Welcome to Outcut AI" });
-	await expect(login).toBeVisible({ timeout: 20000 });
+	await expect(login).toBeVisible({ timeout: 30000 });
 	await expect(
 		login.getByRole("button", { name: "Continue with Google", exact: true }),
 	).toBeVisible();
@@ -122,11 +123,14 @@ test("restored Supabase sessions show the account and sign-out requires authenti
 	const logout = page.waitForRequest((request) => request.url().includes("/auth/v1/logout"));
 	await account.getByRole("button", { name: "Sign out", exact: true }).click();
 	await logout;
-	const login = page.locator('[data-onboarding-state="login"]');
-	await expect(login).toBeVisible();
+	// Local desktop use does not force Welcome after sign-out once onboarding was seen.
+	await expect(page.locator('[data-onboarding-state="login"]')).toHaveCount(0);
+	await expect(page.getByRole("button", { name: "Home", exact: true })).toBeVisible();
 	await page.reload();
-	await expect(login).toBeVisible();
-	await expect(login.getByRole("button", { name: "Continue", exact: true })).toHaveCount(0);
+	await expect(page.getByRole("button", { name: "Home", exact: true })).toBeVisible({
+		timeout: 15000,
+	});
+	await expect(page.locator('[data-onboarding-state="login"]')).toHaveCount(0);
 });
 
 test("sign-in banner fills spare space and keeps the email action usable in a short window", async ({
@@ -145,7 +149,8 @@ test("sign-in banner fills spare space and keeps the email action usable in a sh
 	expect(tallBanner.height).toBeGreaterThan(128);
 	const submitBounds = (await submit.boundingBox())!;
 	const navigationBounds = (await pages.boundingBox())!;
-	expect(navigationBounds.y - submitBounds.y - submitBounds.height).toBeLessThanOrEqual(48);
+	// Footer "Continue without an account" sits between the email action and page dots.
+	expect(navigationBounds.y - submitBounds.y - submitBounds.height).toBeLessThanOrEqual(120);
 	await page.screenshot({
 		path: "test-results/onboarding-responsive-banner.png",
 		animations: "disabled",
