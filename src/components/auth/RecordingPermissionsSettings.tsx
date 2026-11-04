@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { SettingsRow } from "@/components/video-editor/SettingsRow";
+import { SettingsBadge, SettingsGroup, SettingsRow } from "@/components/video-editor/SettingsRow";
 
 export function RecordingPermissionsSettings({ onReview }: { onReview?: () => void }) {
 	const [status, setStatus] = useState<{
@@ -44,12 +44,25 @@ export function RecordingPermissionsSettings({ onReview }: { onReview?: () => vo
 	return (
 		<div className="space-y-6">
 			{!status && !error && (
-				<p role="status" className="text-xs text-muted">
+				<p role="status" className="px-1 text-xs text-muted-foreground">
 					Checking permissions…
 				</p>
 			)}
 			{status?.mac && (
-				<>
+				<SettingsGroup
+					title="System access"
+					badge={
+						<Button
+							variant="ghost"
+							size="sm"
+							disabled={busy}
+							onClick={() => void refresh()}
+							className="h-7 px-2.5 text-xs"
+						>
+							Check again
+						</Button>
+					}
+				>
 					{[
 						{
 							title: "Screen Recording",
@@ -63,37 +76,28 @@ export function RecordingPermissionsSettings({ onReview }: { onReview?: () => vo
 						},
 					].map(({ title, description, granted }) => (
 						<SettingsRow key={title} title={title} description={description}>
-							<span
-								className={`text-xs font-medium ${granted ? "text-success" : "text-muted"}`}
-							>
+							<SettingsBadge dot tone={granted ? "success" : "warning"}>
 								{granted ? "Allowed" : "Required"}
-							</span>
+							</SettingsBadge>
 						</SettingsRow>
 					))}
-					<Button
-						variant="secondary"
-						size="sm"
-						disabled={busy}
-						onClick={() => void refresh()}
-					>
-						Check again
-					</Button>
-				</>
+				</SettingsGroup>
 			)}
 			{status && !status.mac && (
-				<p className="text-xs leading-relaxed text-muted">
+				<p className="px-1 text-xs leading-relaxed text-muted-foreground">
 					Choose what to capture when you start a recording.
 				</p>
 			)}
-			<SettingsRow
-				title="Microphone and camera"
-				description="Access is requested when you enable a microphone or camera for recording."
-				stacked
-			>
-				<span className="text-xs text-muted">Requested when needed</span>
-			</SettingsRow>
+			<SettingsGroup title="Devices">
+				<SettingsRow
+					title="Microphone and camera"
+					description="Access is requested when you enable a microphone or camera for recording."
+				>
+					<SettingsBadge>Requested when needed</SettingsBadge>
+				</SettingsRow>
+			</SettingsGroup>
 			{error && (
-				<div className="space-y-3">
+				<div className="flex items-center justify-between gap-4 rounded-xl border border-danger/25 bg-danger/[0.06] px-4 py-3">
 					<p role="alert" className="text-xs text-danger">
 						{error}
 					</p>
@@ -108,15 +112,16 @@ export function RecordingPermissionsSettings({ onReview }: { onReview?: () => vo
 				</div>
 			)}
 			{onReview && (
-				<SettingsRow
-					title="Permission setup"
-					description="Review access and open system permission settings."
-					stacked
-				>
-					<Button variant="secondary" size="sm" onClick={onReview}>
-						Review permissions
-					</Button>
-				</SettingsRow>
+				<SettingsGroup title="Setup">
+					<SettingsRow
+						title="Permission setup"
+						description="Review access and open system permission settings."
+					>
+						<Button variant="secondary" size="sm" onClick={onReview}>
+							Review permissions
+						</Button>
+					</SettingsRow>
+				</SettingsGroup>
 			)}
 		</div>
 	);

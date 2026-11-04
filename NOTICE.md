@@ -23,7 +23,7 @@ These parts were written or substantially rewritten for Outcut AI. This doesn't 
 - **Branding**: `assets/branding/outcut-logo.svg`, generated icons in `assets/branding/generated/`, `public/app-icons/outcut-*.png`, and `icons/icons/**`
 - **Icon pipeline**: `scripts/generate-outcut-icons.mjs`
 - **Theme**: `src/styles/outcut-brand.css` and related theme wiring
-- **Credits screen**: `src/components/credits/CreditsDialog.tsx`
+- **Credits (Settings → About)**: `src/components/credits/CreditsPanel.tsx`
 - **Documentation**: `README.md`, `CONTRIBUTING.md`, `SECURITY.md`, `NOTICE.md`, `UPSTREAM.md`, `TRADEMARKS.md`
 - **Packaging identity**: product metadata in `package.json` and `electron-builder.json5`, and `outcut.rb`
 
@@ -34,6 +34,6 @@ Everything else remains Recordly-derived (and OpenScreen-derived where applicabl
 If you redistribute Outcut AI or a modified version:
 
 - Keep `NOTICE.md`, `LICENSE`, `LICENSE.md`, `THIRD_PARTY_NOTICES.md`, and `UPSTREAM.md`
-- Keep the in-app **Credits** that acknowledge Recordly and OpenScreen
+- Keep the in-app credits in **Settings → About** that acknowledge Recordly and OpenScreen
 - Don't use the Recordly or OpenScreen names or logos as if your build were an official release of those projects
 - Keep the AGPL obligations when you offer a network service based on this code

@@ -44,6 +44,30 @@
 	--accent-soft-hover: color-mix(in oklab, var(--outcut-accent) 28%, transparent);
 }
 
+/* Settings surfaces: grouped cards that sit one step above the page. */
+:root,
+.light,
+[data-theme="light"] {
+	--settings-card: #ffffff;
+	--settings-card-border: rgb(0 0 0 / 0.07);
+	--settings-divider: rgb(0 0 0 / 0.06);
+	--settings-nav-active: rgb(0 0 0 / 0.055);
+	--settings-nav-hover: rgb(0 0 0 / 0.035);
+	--settings-keycap: #ffffff;
+	--settings-keycap-border: rgb(0 0 0 / 0.12);
+}
+
+.dark,
+[data-theme="dark"] {
+	--settings-card: rgb(255 255 255 / 0.035);
+	--settings-card-border: rgb(255 255 255 / 0.07);
+	--settings-divider: rgb(255 255 255 / 0.06);
+	--settings-nav-active: rgb(255 255 255 / 0.07);
+	--settings-nav-hover: rgb(255 255 255 / 0.04);
+	--settings-keycap: rgb(255 255 255 / 0.06);
+	--settings-keycap-border: rgb(255 255 255 / 0.12);
+}
+
 /* Pressed / active primary controls */
 .button[data-variant="primary"]:active:not([data-disabled="true"]),
 .button[data-variant="primary"][data-pressed="true"]:not([data-disabled="true"]) {

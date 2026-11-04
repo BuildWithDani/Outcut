@@ -1,4 +1,3 @@
-import { CreditsDialog } from "@/components/credits/CreditsDialog";
 import { FeedbackDialog } from "@/components/feedback/FeedbackDialog";
 import { RecordNewButton } from "./RecordNewButton";
 import { SidebarCards } from "./SidebarCards";
@@ -137,7 +136,6 @@ export function DashboardSidebar({
 				</div>
 				<div className="space-y-1 pt-6">
 					<SidebarCards />
-					<CreditsDialog showLabel className={navClass(false)} />
 					<FeedbackDialog showLabel className={navClass(false)} onSignIn={onSignIn} />
 					<Button
 						variant="ghost"

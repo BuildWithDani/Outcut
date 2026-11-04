@@ -22,16 +22,17 @@ describe("dismissible onboarding", () => {
 		expect(dialog).toContain("allowDismissWithoutAccount");
 	});
 
-	it("keeps Credits attribution accessible in the dashboard", () => {
-		const sidebar = readFileSync(
-			path.join(root, "src/components/video-editor/dashboard/DashboardSidebar.tsx"),
+	it("keeps Credits attribution accessible in dashboard Settings > About", () => {
+		const settings = readFileSync(
+			path.join(root, "src/components/video-editor/dashboard/DashboardSettings.tsx"),
 			"utf8",
 		);
 		const credits = readFileSync(
-			path.join(root, "src/components/credits/CreditsDialog.tsx"),
+			path.join(root, "src/components/credits/CreditsPanel.tsx"),
 			"utf8",
 		);
-		expect(sidebar).toContain("CreditsDialog");
+		expect(settings).toContain("<CreditsPanel />");
+		expect(settings).toContain('"about"');
 		expect(credits).toContain("Recordly");
 		expect(credits).toContain("OpenScreen");
 	});
