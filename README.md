@@ -2,7 +2,7 @@
 
 <img src="./assets/branding/outcut-logo.svg" width="120" alt="Outcut AI logo" />
 
-# Outcut AI
+# Outcut
 
 **Record. Edit. Export. All on your machine.**
 
